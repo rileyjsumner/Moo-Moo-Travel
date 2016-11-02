@@ -1,4 +1,4 @@
-package com.servlet;
+package com.Servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -37,12 +37,12 @@ public class User extends HttpServlet {
             System.out.println("Get action is: " + action);
         }
         if("home".equals(action)){
-            forward = "/Home.jsp";
+            forward = "/home.jsp";
         }
         else{
-            forward = "/fail.html";
+            forward = "/home.jsp";
         }
-        
+        forward = "home.jsp";
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
@@ -67,7 +67,7 @@ public class User extends HttpServlet {
     	String action = request.getParameter("action");
     	System.out.println("Post action is: " + action);
         
-        String forward="/login-failed.html";
+        String forward="/home.jsp";
         
         //LOGIC HERE
         
