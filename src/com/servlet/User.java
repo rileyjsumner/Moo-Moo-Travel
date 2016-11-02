@@ -1,6 +1,5 @@
 package com.servlet;
 
-import com.dao.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
