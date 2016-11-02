@@ -10,7 +10,7 @@
         <welcome-file>Home.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
-        <description/>
+        <description></description>
         <display-name>User</display-name>
         <servlet-name>User</servlet-name>
         <servlet-class>com.Servlet.User</servlet-class>
