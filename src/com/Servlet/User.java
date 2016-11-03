@@ -42,7 +42,7 @@ public class User extends HttpServlet {
         else{
             forward = "/home.jsp";
         }
-        forward = "home.jsp";
+        forward = "/home.jsp";
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
