@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!-- T1RLAQJGdnCDOQ6OmZYAizflLVy/B6i0KBDMC0qIgK2vnkmdnTfIVxGrAADA+DdEb1g4H7HhAF8j82stC6bWzRDhWTes630/GDGtjQ6A+vCwtN13i2qn+xVWdhb1EfLmot3x+qLHhR11wmkWsWk7TKF0dO+Ij0C0C0FBmOngNgpwmxrhUDpjc0FGtUNjIKRlEVOC0RHiwXOxKQ7iUm/Wb+DFxkSWGXViw8+S+eepec7829RQVtpzkUIh06ZLdtAdtypqIIS4RJ1IdsKjXXQMNXiyfooJ/GUbrPyukFb25wqpYuT7mGR3b4mnLD4i -->
 <html>
     <head>
         <title>Home</title>
@@ -24,7 +25,7 @@
                 </div>
             </div>
             <div class = "text-center">
-                <h1>Moo-Moo Math</h1>
+                <h1>Moo-Moo Travel</h1>
             </div>
         </div>
         <div class = "content">
@@ -43,11 +44,10 @@
             </div>
             <div class = "content">
                 <div class ="text-center">
-                    <h2 style="font-size: 210%">Welcome to Moo Moo Math!</h2>
-                    <p style="font-size: 150%">Select your grade, and the lesson you would like to work on!</p>
-                    <p style="font-size: 150%">We will run you through a short lesson on how to do the math, and quiz you on your abilities</p>
-                    <img src="pics/pig.png" alt="Oink!"/>
-                    <p style="font-size: 110%">Moo Moo Math was created by Team A: Sam Scheidecker and Riley Sumner</p>
+                    <h2 style="font-size: 210%"></h2>
+                    <p style="font-size: 150%"></p>
+                    <p style="font-size: 150%"></p>
+                    <p style="font-size: 110%">Moo Moo Travel was created by Team A: Sam Scheidecker and Riley Sumner</p>
                     <p style="font-size: 110%">Anoka's BPA Chapter Number 30-0005</p>
                 </div>
             </div>
