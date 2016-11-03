@@ -11,13 +11,13 @@
     </welcome-file-list>
     <servlet>
         <description></description>
-        <display-name>User</display-name>
-        <servlet-name>User</servlet-name>
-        <servlet-class>com.Servlet.User</servlet-class>
+        <display-name>Home</display-name>
+        <servlet-name>Home</servlet-name>
+        <servlet-class>com.Servlet.Home</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>User</servlet-name>
-        <url-pattern>/User</url-pattern>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/Home</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <web-resource-collection>

@@ -1,4 +1,4 @@
-package com.dbutil;
+package com.DbUtil;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class dbutil {
+public class DbUtil {
 
     private static Connection connection = null;
 
@@ -18,7 +18,7 @@ public class dbutil {
         else {
             try {
                 Properties prop = new Properties();
-                InputStream inputStream = dbutil.class.getClassLoader().getResourceAsStream("/db.properties");
+                InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("/db.properties");
                 prop.load(inputStream);
                 String driver = prop.getProperty("driver");
                 String url = prop.getProperty("url");

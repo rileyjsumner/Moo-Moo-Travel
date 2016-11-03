@@ -11,15 +11,17 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-import com.dbutil.dbutil;
+import com.DbUtil.DbUtil;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class User extends HttpServlet {
+
+public class Home extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
-    public User() {
+    public Home() {
         super();
     }
     /**
@@ -71,7 +73,7 @@ public class User extends HttpServlet {
         
         //LOGIC HERE
         
-        if(action.equals("Home")){
+        if(action.equals("home")){
             forward="/home.jsp";
     	}
     	RequestDispatcher view = request.getRequestDispatcher(forward);
