@@ -44,13 +44,15 @@ public class Home extends HttpServlet {
         BufferedReader br;
         String line;
         String data="";
+        System.out.println("Nixon Kek");
         try {
-            url = new URL("http://stackoverflow.com/");
+            url = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8");
             is = url.openStream();  // throws an IOException
             br = new BufferedReader(new InputStreamReader(is));
 
             while ((line = br.readLine()) != null) {
                 data += line + "\n";
+                System.out.println(line);
             }
         } catch (MalformedURLException mue) {
              mue.printStackTrace();
