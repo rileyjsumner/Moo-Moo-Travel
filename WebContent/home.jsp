@@ -10,7 +10,7 @@
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
     <body>
-        
+        ${data}
         <div class = "jumbotron">
             <div class = "text-right">
                 <div class = "col-xs-pull-1">

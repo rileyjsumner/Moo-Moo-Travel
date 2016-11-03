@@ -1,6 +1,11 @@
 package com.Servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,7 +39,30 @@ public class Home extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward="/login-failed.html";
         String action = request.getParameter("action");
-        
+        URL url;
+        InputStream is = null;
+        BufferedReader br;
+        String line;
+        String data="";
+        try {
+            url = new URL("http://stackoverflow.com/");
+            is = url.openStream();  // throws an IOException
+            br = new BufferedReader(new InputStreamReader(is));
+
+            while ((line = br.readLine()) != null) {
+                data += line + "\n";
+            }
+        } catch (MalformedURLException mue) {
+             mue.printStackTrace();
+        } catch (IOException ioe) {
+             ioe.printStackTrace();
+        } finally {
+            try {
+                if (is != null) is.close();
+            } catch (IOException ioe) {
+                // nothing to see here
+            }
+        }
         if (action!=null){
             System.out.println("Get action is: " + action);
         }
@@ -44,6 +72,7 @@ public class Home extends HttpServlet {
         else{
             forward = "/home.jsp";
         }
+        response.addHeader("data", data);
         forward = "/home.jsp";
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -60,7 +89,6 @@ public class Home extends HttpServlet {
         
         Enumeration<String> test = request.getParameterNames();
         String h="";
-        
         while (test.hasMoreElements()){
             h= test.nextElement();
             System.out.println("PARAMETER: "+h+" : "+request.getParameter(h));
