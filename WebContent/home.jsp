@@ -58,14 +58,13 @@
 					    console.log("memes00");
 					    var marker;
 					      function initMap() {
-					        var uluru = {lat: 0, lng: 0};
+					        var anoka = {lat: 0, lng: 0};
 					        var map = new google.maps.Map(document.getElementById('map'), {
 					          zoom: 4,
-					          center: uluru
+					          center: anoka
 					        });
 					        marker = new google.maps.Marker({
-					        	draggable: true,
-					          position: uluru,
+					          position: anoka,
 					          map: map
 					        });
 					        google.maps.event.addListener(
@@ -74,13 +73,13 @@
 				        		function(event)
 				        		{
 				        			marker.setMap(null);
-				            		marker = new google.maps.Marker({position: event.latLng, map: map, draggable: true});
-				            		
-				            		console.log(event.latLng);
+				            		marker = new google.maps.Marker({position: event.latLng, map: map});
+				            		anoka=event.latLng;
+				            		map.setCenter(anoka);
+				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				        		}
 					        );
 					      }
-					      console.log(event.latLng);
 					    </script>
 					    <script async defer
 					    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRjhH9N48NhWnwxBlX6Jii4a7DFp4NJ8o&callback=initMap">
