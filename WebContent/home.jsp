@@ -56,20 +56,36 @@
                 	<div id="map"></div>
 					    <script>
 					    console.log("memes00");
+					    var marker;
 					      function initMap() {
 					        var uluru = {lat: 0, lng: 0};
 					        var map = new google.maps.Map(document.getElementById('map'), {
 					          zoom: 4,
 					          center: uluru
 					        });
-					        var marker = new google.maps.Marker({
+					        marker = new google.maps.Marker({
+					        	draggable: true,
 					          position: uluru,
 					          map: map
 					        });
+<<<<<<< HEAD
 					        
 					        google.maps.event.addListener(map, 'click', function(event) {
 					            //marker = new google.maps.Marker({position: event.latLng, map: map});
 					        });
+=======
+					        google.maps.event.addListener(
+				        		map,
+				        		'click',
+				        		function(event)
+				        		{
+				        			marker.setMap(null);
+				            		marker = new google.maps.Marker({position: event.latLng, map: map, draggable: true});
+				            		
+				            		console.log(event.latLng);
+				        		}
+					        );
+>>>>>>> 3071404dad3de8c5f174842ee4b8ac9003acd010
 					      }
 					      console.log(event.latLng);
 					    </script>
