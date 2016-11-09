@@ -95,6 +95,8 @@
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
+				            		console.log($.get("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng()));
+				            		
 				        		}
 					        );
 					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {

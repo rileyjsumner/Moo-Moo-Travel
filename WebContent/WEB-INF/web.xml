@@ -19,6 +19,16 @@
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>Getdata</display-name>
+        <servlet-name>Getdata</servlet-name>
+        <servlet-class>com.Servlet.Getdata</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Getdata</servlet-name>
+        <url-pattern>/Getdata</url-pattern>
+    </servlet-mapping>
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Kek</web-resource-name>
