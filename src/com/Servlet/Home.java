@@ -1,5 +1,6 @@
 package com.Servlet;
 
+import org.json.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +16,7 @@ import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
 
 import com.DbUtil.DbUtil;
 
@@ -36,45 +38,70 @@ public class Home extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String forward="/login-failed.html";
-        String action = request.getParameter("action");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+    	String forward;
         URL url;
         InputStream is = null;
         BufferedReader br;
         String line;
         String data="";
-        System.out.println("Nixon Kek");
+        
+        //VERIFY A GET REQUEST IS HAPPENING
+        System.out.println("GET REQUEST!");
+        
+        // FETCH DATA FROM GOOGLE API
         try {
             url = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8");
-            is = url.openStream();  // throws an IOException
+            is = url.openStream();
             br = new BufferedReader(new InputStreamReader(is));
-
+            
+            // READ DATA INTO STRING
             while ((line = br.readLine()) != null) {
                 data += line + "\n";
                 System.out.println(line);
             }
-        } catch (MalformedURLException mue) {
+        }
+        catch (MalformedURLException mue)
+        {
              mue.printStackTrace();
-        } catch (IOException ioe) {
+        }
+        catch (IOException ioe)
+        {
              ioe.printStackTrace();
-        } finally {
-            try {
+        }
+        finally
+        {
+            try
+            {
                 if (is != null) is.close();
-            } catch (IOException ioe) {
-                // nothing to see here
+            }
+            catch (IOException ioe)
+            {
+                
             }
         }
-        if (action!=null){
-            System.out.println("Get action is: " + action);
-        }
-        if("home".equals(action)){
-            forward = "/home.jsp";
-        }
-        else{
-            forward = "/home.jsp";
-        }
-        response.addHeader("data", data);
+        
+        // PARSE JSON DATA
+        JSONObject jsonObj;
+		try
+		{
+			JSONObject myjson = new JSONObject(data);
+			JSONArray the_json_array = myjson.getJSONArray("results");
+			int size = the_json_array.length();
+		    ArrayList<JSONObject> arrays = new ArrayList<JSONObject>();
+		    for (int i = 0; i < size; i++) {
+		        JSONObject another_json_object = the_json_array.getJSONObject(i);
+		            //Blah blah blah...
+		            arrays.add(another_json_object);
+		    }
+		    System.out.println(arrays);
+		}
+		catch (JSONException e)
+		{
+			e.printStackTrace();
+		}
+        request.setAttribute("data", data);
         forward = "/home.jsp";
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
