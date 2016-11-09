@@ -13,7 +13,7 @@
     </head>
     <style>
 	 #map {
-	   width: 100%;
+	   width:50%;
 	   height: 400px;
 	   background-color: grey;
 	 }
@@ -58,7 +58,7 @@
 					    console.log("memes00");
 					    var marker;
 					      function initMap() {
-					        var anoka = {lat: 0, lng: 0};
+					        var anoka = {lat: 45.22458150431289, lng: -93.38194370269775};
 					        var map = new google.maps.Map(document.getElementById('map'), {
 					          zoom: 4,
 					          center: anoka
