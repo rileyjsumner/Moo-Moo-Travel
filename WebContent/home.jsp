@@ -55,7 +55,6 @@
                 	
                 	<div id="map"></div>
 					    <script>
-					    console.log("memes00");
 					    var marker;
 					      function initMap() {
 					        var uluru = {lat: 0, lng: 0};
@@ -68,12 +67,9 @@
 					          position: uluru,
 					          map: map
 					        });
-<<<<<<< HEAD
 					        
 					        google.maps.event.addListener(map, 'click', function(event) {
-					            //marker = new google.maps.Marker({position: event.latLng, map: map});
 					        });
-=======
 					        google.maps.event.addListener(
 				        		map,
 				        		'click',
@@ -85,7 +81,6 @@
 				            		console.log(event.latLng);
 				        		}
 					        );
->>>>>>> 3071404dad3de8c5f174842ee4b8ac9003acd010
 					      }
 					      console.log(event.latLng);
 					    </script>
