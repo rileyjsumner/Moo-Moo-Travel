@@ -67,12 +67,9 @@
 					          position: anoka,
 					          map: map
 					        });
-<<<<<<< HEAD
-					        
 					        google.maps.event.addListener(map, 'click', function(event) {
 					            //marker = new google.maps.Marker({position: event.latLng, map: map});
 					        });
-=======
 					        google.maps.event.addListener(
 				        		map,
 				        		'click',
@@ -85,7 +82,6 @@
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				        		}
 					        );
->>>>>>> 3071404dad3de8c5f174842ee4b8ac9003acd010
 					      }
 					    </script>
 					    <script async defer
