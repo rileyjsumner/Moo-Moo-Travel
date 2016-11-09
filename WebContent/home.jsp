@@ -66,11 +66,9 @@
 					          position: uluru,
 					          map: map
 					        });
+					        
 					        google.maps.event.addListener(map, 'click', function(event) {
-
-					            marker = new google.maps.Marker({position: event.latLng, map: map});
-					            console.log(event.latLng);
-
+					            //marker = new google.maps.Marker({position: event.latLng, map: map});
 					        });
 					      }
 					      console.log(event.latLng);
