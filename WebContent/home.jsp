@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!-- AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8 -->
+<!-- Search: AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8 
+	 Map: AIzaSyCRjhH9N48NhWnwxBlX6Jii4a7DFp4NJ8o-->
 <html>
     <head>
         <title>Home</title>
@@ -10,6 +11,13 @@
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
+    <style>
+	 #map {
+	   width: 100%;
+	   height: 400px;
+	   background-color: grey;
+	 }
+	</style>
     <body>
         ${data}
         <div class = "jumbotron">
@@ -44,9 +52,35 @@
             </div>
             <div class = "content">
                 <div class ="text-center">
+                	
+                	<div id="map"></div>
+					    <script>
+					    console.log("memes00");
+					      function initMap() {
+					        var uluru = {lat: 0, lng: 0};
+					        var map = new google.maps.Map(document.getElementById('map'), {
+					          zoom: 4,
+					          center: uluru
+					        });
+					        var marker = new google.maps.Marker({
+					          position: uluru,
+					          map: map
+					        });
+					        google.maps.event.addListener(map, 'click', function(event) {
+
+					            marker = new google.maps.Marker({position: event.latLng, map: map});
+					            console.log(event.latLng);
+
+					        });
+					      }
+					      console.log(event.latLng);
+					    </script>
+					    <script async defer
+					    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRjhH9N48NhWnwxBlX6Jii4a7DFp4NJ8o&callback=initMap">
+					    </script>
                     <h2 style="font-size: 210%"></h2>
                     <p style="font-size: 150%"></p>
-                    <p style="font-size: 150%"></p>
+                    <p style="font-size: 150%">Map^^</p>
                     <p style="font-size: 110%">Moo Moo Travel was created by Team A: Sam Scheidecker and Riley Sumner</p>
                     <p style="font-size: 110%">Anoka's BPA Chapter Number 30-0005</p>
                 </div>
