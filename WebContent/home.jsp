@@ -67,6 +67,22 @@
 					          position: anoka,
 					          map: map
 					        });
+					        if (navigator.geolocation) {
+					            navigator.geolocation.getCurrentPosition(function(position) {
+					              var pos = {
+					                lat: position.coords.latitude,
+					                lng: position.coords.longitude
+					              };
+					              marker.setMap(null);
+				            	  marker = new google.maps.Marker({position: pos, map: map});
+					              map.setCenter(pos);
+					            }, function() {
+					              handleLocationError(true, infoWindow, map.getCenter());
+					            });
+					          } else {
+					            // Browser doesn't support Geolocation
+					            handleLocationError(false, infoWindow, map.getCenter());
+					          }
 					        google.maps.event.addListener(map, 'click', function(event) {
 					            //marker = new google.maps.Marker({position: event.latLng, map: map});
 					        });
@@ -82,6 +98,8 @@
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				        		}
 					        );
+					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+					         }
 					      }
 					    </script>
 					    <script async defer
