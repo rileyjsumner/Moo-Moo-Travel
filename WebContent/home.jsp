@@ -13,6 +13,7 @@
     </head>
     <style>
 	 #map {
+	   margin-left: 2px;
 	   width:50%;
 	   height: 400px;
 	   background-color: grey;
