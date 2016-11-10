@@ -14,10 +14,34 @@
     <style>
 	 #map {
 	   margin-left: 2px;
-	   width:50%;
+	   width:100%;
 	   height: 400px;
 	   background-color: grey;
 	 }
+ 	.row {
+	    z-index: -1;
+	    margin-left: -15px;
+	    margin-right: -15px;
+	    color: black;
+	    font-family: 'fantasy', serif; 
+	    font: Papyrus, book antiqua;
+	    text-align: center;
+	}
+	.row:before, .row:after{
+	    content: " ";
+	    display: table;
+	}
+	.row:after {
+	    clear: both;
+	}
+	.col-1 {
+	    z-index: 0;
+	    position: relative;
+	    min-height: 1px;
+	    float: none;
+	    text-align: center;
+	    width: 49%;
+	}
 	</style>
     <body>
         ${data}
@@ -52,8 +76,8 @@
                 </div>
             </div>
             <div class = "content">
-                <div class ="text-center">
-                	
+                <div class ="row">
+                <div class="col-1" style="width: 45%; margin-left: 35px; float: left;">
                 	<div id="map"></div>
 					<script type="text/javascript">
 					(function() {
@@ -135,6 +159,11 @@
 					    <script async defer
 					    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRjhH9N48NhWnwxBlX6Jii4a7DFp4NJ8o&callback=initMap">
 					    </script>
+					</div>
+					    <div class="col-1" style="width: 45%; margin-left: 35px; float: left;">
+					    	<p>kek</p>
+					    </div>
+					    </div>
                     <h2 style="font-size: 210%"></h2>
                     <p style="font-size: 150%"></p>
                     <p style="font-size: 150%">Map^^</p>
