@@ -55,6 +55,33 @@
                 <div class ="text-center">
                 	
                 	<div id="map"></div>
+					<script type="text/javascript">
+					(function() {
+					  var httpRequest;
+					
+					  function makeRequest(url) {
+					    httpRequest = new XMLHttpRequest();
+						
+					    if (!httpRequest) {
+					      alert('Giving up :( Cannot create an XMLHTTP instance');
+					      return false;
+					    }
+					    httpRequest.onreadystatechange = alertContents;
+					    httpRequest.open('GET', url);
+					    httpRequest.send();
+					  }
+					
+					  function alertContents() {
+					    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+					      if (httpRequest.status === 200) {
+					        alert(httpRequest.responseText);
+					      } else {
+					        alert('There was a problem with the request.');
+					      }
+					    }
+					  }
+					})();
+					</script>
 					    <script>
 					    var marker;
 					      function initMap() {
@@ -95,6 +122,7 @@
 				            		marker = new google.maps.Marker({position: event.latLng, map: map});
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
+				            		makeRequest("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng());
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				            		console.log($.get("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng()));
 				            		
