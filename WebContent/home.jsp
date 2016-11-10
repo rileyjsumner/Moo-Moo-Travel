@@ -44,7 +44,6 @@
 	}
 	</style>
     <body>
-        ${data}
         <div class = "jumbotron">
             <div class = "text-right">
                 <div class = "col-xs-pull-1">
@@ -80,9 +79,10 @@
                 <div class="col-1" style="width: 45%; margin-left: 35px; float: left;">
                 	<div id="map"></div>
 					<script type="text/javascript">
-					(function() {
+					//(function() {
 					  var httpRequest;
-					
+						var locationdata;
+						var hotels;
 					  function makeRequest(url) {
 					    httpRequest = new XMLHttpRequest();
 						
@@ -98,17 +98,42 @@
 					  function alertContents() {
 					    if (httpRequest.readyState === XMLHttpRequest.DONE) {
 					      if (httpRequest.status === 200) {
-					        alert(httpRequest.responseText);
+					    	  locationdata=(JSON.parse(httpRequest.responseText)).results;
+					    	  displayData();
 					      } else {
 					        alert('There was a problem with the request.');
 					      }
 					    }
 					  }
-					})();
+					  function displayData()
+					  {
+						  hotels=[];
+						  var size = locationdata.length;
+						  for(var i=0;i<size;i++)
+						  {
+							  var size2 = locationdata[i].types.length;
+							  for(var s=0;s<size2;s++)
+							  {
+								  //if(locationdata[i].types[s]==="lodging")
+								  //{
+									  hotels.push(locationdata[i]);
+								  //}
+							  }
+						  }
+						  document.getElementById("kek").innerHTML="";
+						  
+						  var size = hotels.length;
+						  for(var i=0;i<size;i++)
+						  {
+							  document.getElementById("kek").innerHTML+="Place "+(i+1)+": "+hotels[i].name+"<br>";
+						  }
+					  }
+					//})();
 					</script>
 					    <script>
 					    var marker;
 					      function initMap() {
+					    	  
 					        var anoka = {lat: 45.22458150431289, lng: -93.38194370269775};
 					        var map = new google.maps.Map(document.getElementById('map'), {
 					          zoom: 4,
@@ -152,6 +177,7 @@
 				            		
 				        		}
 					        );
+					        makeRequest("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng());
 					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 					         }
 					      }
@@ -161,7 +187,7 @@
 					    </script>
 					</div>
 					    <div class="col-1" style="width: 45%; margin-left: 35px; float: left;">
-					    	<p>kek</p>
+					    	<p id = "kek">kek</p>
 					    </div>
 					    </div>
                     <h2 style="font-size: 210%"></h2>

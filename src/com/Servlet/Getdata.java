@@ -55,7 +55,7 @@ public class Getdata extends HttpServlet {
         
         // FETCH DATA FROM GOOGLE API
         try {
-        	String urlstr="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+lat+","+lng+"&radius=10000&key=AIzaSyCRjhH9N48NhWnwxBlX6Jii4a7DFp4NJ8o";
+        	String urlstr="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+lat+","+lng+"&radius=50000&key=AIzaSyCRjhH9N48NhWnwxBlX6Jii4a7DFp4NJ8o";
             url = new URL(urlstr);
             System.out.println(urlstr);
             is = url.openStream();
