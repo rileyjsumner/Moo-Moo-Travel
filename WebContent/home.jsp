@@ -10,12 +10,13 @@
         <link rel = "stylesheet" href = "main.css">
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <style>
 	 #map {
 	   margin-left: 2px;
 	   width:100%;
-	   height: 400px;
+	   height: 600px;
 	   background-color: grey;
 	 }
  	.row {
@@ -40,7 +41,6 @@
 	    min-height: 1px;
 	    float: none;
 	    text-align: center;
-	    width: 49%;
 	}
 	</style>
     <body>
@@ -76,13 +76,14 @@
             </div>
             <div class = "content">
                 <div class ="row">
-                <div class="col-1" style="width: 45%; margin-left: 35px; float: left;">
+                <div class="col-1" style="width: 70%; margin-left: 35px; float: left;">
                 	<div id="map"></div>
 					<script type="text/javascript">
 					//(function() {
 					  var httpRequest;
 						var locationdata;
 						var hotels;
+						var iconMarkers;
 					  function makeRequest(url) {
 					    httpRequest = new XMLHttpRequest();
 						
@@ -107,17 +108,19 @@
 					  }
 					  function displayData()
 					  {
+						 
 						  hotels=[];
+						  iconMarkers=[];
 						  var size = locationdata.length;
 						  for(var i=0;i<size;i++)
 						  {
 							  var size2 = locationdata[i].types.length;
 							  for(var s=0;s<size2;s++)
 							  {
-								  //if(locationdata[i].types[s]==="lodging")
-								  //{
+								  if(locationdata[i].types[s]==="lodging")
+								  {
 									  hotels.push(locationdata[i]);
-								  //}
+								  }
 							  }
 						  }
 						  document.getElementById("kek").innerHTML="";
@@ -125,23 +128,36 @@
 						  var size = hotels.length;
 						  for(var i=0;i<size;i++)
 						  {
+							  iconMarkers.push(new google.maps.Marker({position: {lat: hotels[i].geometry.location.lat, lng: hotels[i].geometry.location.lng}, map: map}));
 							  document.getElementById("kek").innerHTML+="Place "+(i+1)+": "+hotels[i].name+"<br>";
+							  var size2 = locationdata[i].types.length;
+							  for(var s=0;s<size2;s++)
+							  {
+								  	
+									document.getElementById("kek").innerHTML+="Type: "+(i+1)+": "+hotels[i].types[s]+"<br>";
+								  
+							  }
 						  }
 					  }
 					//})();
 					</script>
 					    <script>
 					    var marker;
+					    var map;
 					      function initMap() {
 					    	  
 					        var anoka = {lat: 45.22458150431289, lng: -93.38194370269775};
-					        var map = new google.maps.Map(document.getElementById('map'), {
+					        map = new google.maps.Map(document.getElementById('map'), {
 					          zoom: 4,
 					          center: anoka
 					        });
+					        var image = //{
+					        	/*url:*/'pics/hotelicon.png';//,
+					        	//size : new google.maps.Size(20, 20) };
 					        marker = new google.maps.Marker({
 					          position: anoka,
-					          map: map
+					          map: map,
+					          icon: image
 					        });
 					        if (navigator.geolocation) {
 					            navigator.geolocation.getCurrentPosition(function(position) {
@@ -168,7 +184,7 @@
 				        		function(event)
 				        		{
 				        			marker.setMap(null);
-				            		marker = new google.maps.Marker({position: event.latLng, map: map});
+				            		marker = new google.maps.Marker({position: event.latLng, map: map, icon: image});
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
 				            		makeRequest("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng());
@@ -186,7 +202,7 @@
 					    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRjhH9N48NhWnwxBlX6Jii4a7DFp4NJ8o&callback=initMap">
 					    </script>
 					</div>
-					    <div class="col-1" style="width: 45%; margin-left: 35px; float: left;">
+					    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
 					    	<p id = "kek">kek</p>
 					    </div>
 					    </div>
