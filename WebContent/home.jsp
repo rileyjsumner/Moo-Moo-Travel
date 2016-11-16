@@ -83,7 +83,7 @@
 					  var httpRequest;
 						var locationdata;
 						var hotels;
-						var iconMarkers;
+						var iconMarkers=[];
 					  function makeRequest(url) {
 					    httpRequest = new XMLHttpRequest();
 						
@@ -110,6 +110,11 @@
 					  {
 						 
 						  hotels=[];
+						  var size=iconMarkers.length;
+						  for(var i=0;i<size;i++)
+						  {
+							  iconMarkers[i].setMap(null);
+						  }
 						  iconMarkers=[];
 						  var size = locationdata.length;
 						  for(var i=0;i<size;i++)
