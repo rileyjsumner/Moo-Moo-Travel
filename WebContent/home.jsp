@@ -10,6 +10,7 @@
         <link rel = "stylesheet" href = "main.css">
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8&libraries=places"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <style>
@@ -79,76 +80,43 @@
                 <div class="col-1" style="width: 70%; margin-left: 35px; float: left;">
                 	<div id="map"></div>
 					<script type="text/javascript">
-					//(function() {
-					  var httpRequest;
+						var pic_default = 'pics/default.png';
+					    var pic_hotel = 'pics/lodging_0star.png';
+					    var pic_restaurant = 'pics/restaurant.png';
+					  	var httpRequest;
 						var locationdata;
-						var hotels;
 						var iconMarkers=[];
-					  function makeRequest(url) {
-					    httpRequest = new XMLHttpRequest();
 						
-					    if (!httpRequest) {
-					      alert('Giving up :( Cannot create an XMLHTTP instance');
-					      return false;
-					    }
-					    httpRequest.onreadystatechange = alertContents;
-					    httpRequest.open('GET', url);
-					    httpRequest.send();
-					  }
-					
-					  function alertContents() {
-					    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-					      if (httpRequest.status === 200) {
-					    	  locationdata=(JSON.parse(httpRequest.responseText)).results;
-					    	  displayData();
-					      } else {
-					        alert('There was a problem with the request.');
-					      }
-					    }
-					  }
-					  function displayData()
-					  {
-						 
-						  hotels=[];
-						  var size=iconMarkers.length;
-						  for(var i=0;i<size;i++)
-						  {
-							  iconMarkers[i].setMap(null);
-						  }
-						  iconMarkers=[];
-						  var size = locationdata.length;
-						  for(var i=0;i<size;i++)
-						  {
-							  var size2 = locationdata[i].types.length;
-							  for(var s=0;s<size2;s++)
-							  {
-								  if(locationdata[i].types[s]==="lodging")
-								  {
-									  hotels.push(locationdata[i]);
+						
+						
+					  	function displayData()
+					  	{
+						  	var size=iconMarkers.length;
+						  	for(var i=0;i<size;i++)
+						  	{
+								  iconMarkers[i].setMap(null);
+						  	}
+						 	iconMarkers=[];
+						 	var size = locationdata.length;
+						 	for(var i=0;i<size;i++)
+						  	{
+							  	var size2 = locationdata[i].types.length;
+							  	for(var s=0;s<size2;s++)
+							  	{
+								  	if(locationdata[i].types[s]==="lodging")
+								  	{
+									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_hotel}));
+								  	}
+								  	else if(locationdata[i].types[s]==="restaurant" || locationdata[i].types[s]==="bakery" || locationdata[i].types[s]==="bar" || locationdata[i].types[s]==="cafe" || locationdata[i].types[s]==="food")
+								  	{
+									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_restaurant}));
 								  }
 							  }
 						  }
-						  document.getElementById("kek").innerHTML="";
-						  
-						  var size = hotels.length;
-						  for(var i=0;i<size;i++)
-						  {
-							  iconMarkers.push(new google.maps.Marker({position: {lat: hotels[i].geometry.location.lat, lng: hotels[i].geometry.location.lng}, map: map}));
-							  document.getElementById("kek").innerHTML+="Place "+(i+1)+": "+hotels[i].name+"<br>";
-							  var size2 = locationdata[i].types.length;
-							  for(var s=0;s<size2;s++)
-							  {
-								  	
-									document.getElementById("kek").innerHTML+="Type: "+(i+1)+": "+hotels[i].types[s]+"<br>";
-								  
-							  }
-						  }
 					  }
-					//})();
-					</script>
-					    <script>
 					    var marker;
 					    var map;
+					    var service;
 					      function initMap() {
 					    	  
 					        var anoka = {lat: 45.22458150431289, lng: -93.38194370269775};
@@ -156,13 +124,11 @@
 					          zoom: 4,
 					          center: anoka
 					        });
-					        var image = //{
-					        	/*url:*/'pics/hotelicon.png';//,
-					        	//size : new google.maps.Size(20, 20) };
+					        service = new google.maps.places.PlacesService(map);
 					        marker = new google.maps.Marker({
 					          position: anoka,
 					          map: map,
-					          icon: image
+					          icon: pic_default
 					        });
 					        if (navigator.geolocation) {
 					            navigator.geolocation.getCurrentPosition(function(position) {
@@ -171,7 +137,7 @@
 					                lng: position.coords.longitude
 					              };
 					              marker.setMap(null);
-				            	  marker = new google.maps.Marker({position: pos, map: map});
+				            	  marker = new google.maps.Marker({position: pos, map: map,icon: pic_default});
 					              map.setCenter(pos);
 					            }, function() {
 					              handleLocationError(true, infoWindow, map.getCenter());
@@ -189,16 +155,15 @@
 				        		function(event)
 				        		{
 				        			marker.setMap(null);
-				            		marker = new google.maps.Marker({position: event.latLng, map: map, icon: image});
+				            		marker = new google.maps.Marker({position: event.latLng, map: map, icon: pic_default});
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
-				            		makeRequest("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng());
+				            		
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				            		console.log($.get("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng()));
 				            		
 				        		}
 					        );
-					        makeRequest("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng());
 					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 					         }
 					      }
