@@ -85,7 +85,6 @@
 					  	var httpRequest;
 						var locationdata;
 						var iconMarkers=[];
-<<<<<<< HEAD
 					  	function makeRequest(url) {
 					    	httpRequest = new XMLHttpRequest();
 					    	if (!httpRequest) {
@@ -134,7 +133,6 @@
 						  //document.getElementById("kek").innerHTML="";
 						  //document.getElementById("kek").innerHTML+="Type: "+(i+1)+": "+hotels[i].types[s]+"<br>";
 					  }
-=======
 					  	function displayData()
 					  	{
 						  	var size=iconMarkers.length;
@@ -160,7 +158,6 @@
 							    }
 						    }
 					    }
->>>>>>> b3ed3120b60a8a1fde0dc487cb5d88205c0e3796
 					    var marker;
 					    var map;
 					      function initMap() {
@@ -203,10 +200,7 @@
 				            		marker = new google.maps.Marker({position: event.latLng, map: map, icon: pic_default});
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
-<<<<<<< HEAD
 				            		makeRequest("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng());
-=======
->>>>>>> b3ed3120b60a8a1fde0dc487cb5d88205c0e3796
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				            		console.log($.get("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng()));
 				            		
