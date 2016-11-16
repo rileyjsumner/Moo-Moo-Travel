@@ -113,7 +113,7 @@
 					    var marker;
 					    var map;
 					    var service;
-					      function initMap() {
+					        function initMap() {
 					    	  
 					        var anoka = {lat: 45.22458150431289, lng: -93.38194370269775};
 					        map = new google.maps.Map(document.getElementById('map'), {
