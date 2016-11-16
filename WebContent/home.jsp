@@ -14,12 +14,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <style>
-	 #map {
+	#map {
 	   margin-left: 2px;
 	   width:100%;
 	   height: 600px;
 	   background-color: grey;
-	 }
+	}
  	.row {
 	    z-index: -1;
 	    margin-left: -15px;
@@ -66,7 +66,6 @@
                 <div id = "GradeButtonContainer" class = "col-md-12">
                     <p></p>
                     <input type = "button" style = "background-color:#81C6C9; border: 4px solid #489194" onclick = "document.location.href = 'Home.jsp'" value = "Home"/>
-                    
                     <p></p>
                 </div>
             </div>
@@ -86,15 +85,12 @@
 					  	var httpRequest;
 						var locationdata;
 						var iconMarkers=[];
-						
-						
-						
 					  	function displayData()
 					  	{
 						  	var size=iconMarkers.length;
 						  	for(var i=0;i<size;i++)
 						  	{
-								  iconMarkers[i].setMap(null);
+								iconMarkers[i].setMap(null);
 						  	}
 						 	iconMarkers=[];
 						 	var size = locationdata.length;
@@ -110,10 +106,10 @@
 								  	else if(locationdata[i].types[s]==="restaurant" || locationdata[i].types[s]==="bakery" || locationdata[i].types[s]==="bar" || locationdata[i].types[s]==="cafe" || locationdata[i].types[s]==="food")
 								  	{
 									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_restaurant}));
-								  }
-							  }
-						  }
-					  }
+								    }
+							    }
+						    }
+					    }
 					    var marker;
 					    var map;
 					    var service;
@@ -126,26 +122,26 @@
 					        });
 					        service = new google.maps.places.PlacesService(map);
 					        marker = new google.maps.Marker({
-					          position: anoka,
-					          map: map,
-					          icon: pic_default
+				            	position: anoka,
+				            	map: map,
+				            	icon: pic_default
 					        });
 					        if (navigator.geolocation) {
-					            navigator.geolocation.getCurrentPosition(function(position) {
-					              var pos = {
-					                lat: position.coords.latitude,
-					                lng: position.coords.longitude
-					              };
-					              marker.setMap(null);
-				            	  marker = new google.maps.Marker({position: pos, map: map,icon: pic_default});
-					              map.setCenter(pos);
+					        	navigator.geolocation.getCurrentPosition(function(position) {
+					            	var pos = {
+					              		lat: position.coords.latitude,
+					              		lng: position.coords.longitude
+					            	};
+					                marker.setMap(null);
+				            	    marker = new google.maps.Marker({position: pos, map: map,icon: pic_default});
+					                map.setCenter(pos);
 					            }, function() {
-					              handleLocationError(true, infoWindow, map.getCenter());
+					            	handleLocationError(true, infoWindow, map.getCenter());
 					            });
-					          } else {
+					        } else {
 					            // Browser doesn't support Geolocation
-					            handleLocationError(false, infoWindow, map.getCenter());
-					          }
+					        	handleLocationError(false, infoWindow, map.getCenter());
+					        }
 					        google.maps.event.addListener(map, 'click', function(event) {
 					            //marker = new google.maps.Marker({position: event.latLng, map: map});
 					        });
@@ -158,32 +154,29 @@
 				            		marker = new google.maps.Marker({position: event.latLng, map: map, icon: pic_default});
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
-				            		
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				            		console.log($.get("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng()));
 				            		
 				        		}
 					        );
 					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-					         }
-					      }
+					        }
+					    }
 					    </script>
 					    <script async defer
 					    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRjhH9N48NhWnwxBlX6Jii4a7DFp4NJ8o&callback=initMap">
 					    </script>
 					</div>
-					    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
-					    	<p id = "kek">kek</p>
-					    </div>
-					    </div>
-                    <h2 style="font-size: 210%"></h2>
-                    <p style="font-size: 150%"></p>
-                    <p style="font-size: 150%">Map^^</p>
-                    <p style="font-size: 110%">Moo Moo Travel was created by Team A: Sam Scheidecker and Riley Sumner</p>
-                    <p style="font-size: 110%">Anoka's BPA Chapter Number 30-0005</p>
-                </div>
-            </div>
-        </div>
-        
+				    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
+				    	<p id = "kek">kek</p>
+				    </div>
+			    </div>
+                <h2 style="font-size: 210%"></h2>
+                <p style="font-size: 150%"></p>
+                <p style="font-size: 150%">Map^^</p>
+                <p style="font-size: 110%">Moo Moo Travel was created by Team A: Sam Scheidecker and Riley Sumner</p>
+                <p style="font-size: 110%">Anoka's BPA Chapter Number 30-0005</p>
+             </div>
+         </div>
     </body>
 </html>
