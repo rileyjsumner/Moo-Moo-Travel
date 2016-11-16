@@ -160,13 +160,8 @@
 					    }
 					    var marker;
 					    var map;
-<<<<<<< HEAD
 					    var service;
-					        function initMap() {
-=======
 					      function initMap() {
->>>>>>> c01afc3babf59e4b78916f6d2b3576d53fcdd37a
-					    	  
 					        var anoka = {lat: 45.22458150431289, lng: -93.38194370269775};
 					        map = new google.maps.Map(document.getElementById('map'), {
 					          zoom: 4,
