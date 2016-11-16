@@ -86,37 +86,56 @@
 					  	var httpRequest;
 						var locationdata;
 						var iconMarkers=[];
-						
-						
-						
-					  	function displayData()
-					  	{
-						  	var size=iconMarkers.length;
-						  	for(var i=0;i<size;i++)
-						  	{
-								  iconMarkers[i].setMap(null);
-						  	}
-						 	iconMarkers=[];
-						 	var size = locationdata.length;
-						 	for(var i=0;i<size;i++)
-						  	{
-							  	var size2 = locationdata[i].types.length;
-							  	for(var s=0;s<size2;s++)
-							  	{
-								  	if(locationdata[i].types[s]==="lodging")
-								  	{
-									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_hotel}));
-								  	}
-								  	else if(locationdata[i].types[s]==="restaurant" || locationdata[i].types[s]==="bakery" || locationdata[i].types[s]==="bar" || locationdata[i].types[s]==="cafe" || locationdata[i].types[s]==="food")
-								  	{
-									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_restaurant}));
+					  	function makeRequest(url) {
+					    	httpRequest = new XMLHttpRequest();
+					    	if (!httpRequest) {
+					      		alert('Giving up :( Cannot create an XMLHTTP instance');
+					      		return false;
+					    	}
+					    	httpRequest.onreadystatechange = alertContents;
+					    	httpRequest.open('GET', url);
+					    	httpRequest.send();
+					  	}
+					
+					  function alertContents() {
+					    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+					      if (httpRequest.status === 200) {
+					    	  locationdata=(JSON.parse(httpRequest.responseText)).results;
+					    	  displayData();
+					      } else {
+					        alert('There was a problem with the request.');
+					      }
+					    }
+					  }
+					  function displayData()
+					  {
+						  var size=iconMarkers.length;
+						  for(var i=0;i<size;i++)
+						  {
+							  iconMarkers[i].setMap(null);
+						  }
+						  iconMarkers=[];
+						  var size = locationdata.length;
+						  for(var i=0;i<size;i++)
+						  {
+							  var size2 = locationdata[i].types.length;
+							  for(var s=0;s<size2;s++)
+							  {
+								  if(locationdata[i].types[s]==="lodging")
+								  {
+									  iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_hotel}));
+								  }
+								  else if(locationdata[i].types[s]==="restaurant" || locationdata[i].types[s]==="bakery" || locationdata[i].types[s]==="bar" || locationdata[i].types[s]==="cafe" || locationdata[i].types[s]==="food")
+								  {
+									  iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_restaurant}));
 								  }
 							  }
 						  }
+						  //document.getElementById("kek").innerHTML="";
+						  //document.getElementById("kek").innerHTML+="Type: "+(i+1)+": "+hotels[i].types[s]+"<br>";
 					  }
 					    var marker;
 					    var map;
-					    var service;
 					      function initMap() {
 					    	  
 					        var anoka = {lat: 45.22458150431289, lng: -93.38194370269775};
@@ -124,7 +143,6 @@
 					          zoom: 4,
 					          center: anoka
 					        });
-					        service = new google.maps.places.PlacesService(map);
 					        marker = new google.maps.Marker({
 					          position: anoka,
 					          map: map,
@@ -158,18 +176,19 @@
 				            		marker = new google.maps.Marker({position: event.latLng, map: map, icon: pic_default});
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
-				            		
+				            		makeRequest("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng());
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				            		console.log($.get("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng()));
 				            		
 				        		}
 					        );
+					        makeRequest("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + marker.getPosition().lat() + "," + +marker.getPosition().lng() + "&key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8+");
 					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 					         }
 					      }
 					    </script>
 					    <script async defer
-					    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRjhH9N48NhWnwxBlX6Jii4a7DFp4NJ8o&callback=initMap">
+					    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8&callback=initMap">
 					    </script>
 					</div>
 					    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
