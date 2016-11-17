@@ -79,60 +79,78 @@
                 <div class="col-1" style="width: 70%; margin-left: 35px; float: left;">
                 	<div id="map"></div>
 					<script type="text/javascript">
+						var city="";
 						var pic_default = 'pics/default.png';
 					    var pic_hotel = 'pics/lodging_0star.png';
 					    var pic_restaurant = 'pics/restaurant.png';
 					  	var httpRequest;
 						var locationdata;
 						var iconMarkers=[];
-					  	function makeRequest(url) {
+					  	function makeRequest(url,function_name) {
 					    	httpRequest = new XMLHttpRequest();
 					    	if (!httpRequest) {
 					      		alert('Giving up :( Cannot create an XMLHTTP instance');
 					      		return false;
 					    	}
-					    	httpRequest.onreadystatechange = alertContents;
+					    	httpRequest.onreadystatechange = function () { alertContents(function_name); };
 					    	httpRequest.open('GET', url);
 					    	httpRequest.send();
 					  	}
-					
-					  function alertContents() {
-					    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-					      if (httpRequest.status === 200) {
-					    	  locationdata=(JSON.parse(httpRequest.responseText)).results;
-					    	  displayData();
-					      } else {
-					        alert('There was a problem with the request.');
-					      }
-					    }
-					  }
-					  function displayData()
-					  {
-						  var size=iconMarkers.length;
-						  for(var i=0;i<size;i++)
-						  {
-							  iconMarkers[i].setMap(null);
-						  }
-						  iconMarkers=[];
-						  var size = locationdata.length;
-						  for(var i=0;i<size;i++)
-						  {
-							  var size2 = locationdata[i].types.length;
-							  for(var s=0;s<size2;s++)
-							  {
-								  if(locationdata[i].types[s]==="lodging")
-								  {
-									  iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_hotel}));
-								  }
-								  else if(locationdata[i].types[s]==="restaurant" || locationdata[i].types[s]==="bakery" || locationdata[i].types[s]==="bar" || locationdata[i].types[s]==="cafe" || locationdata[i].types[s]==="food")
-								  {
-									  iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_restaurant}));
-								  }
-							  }
-						  }
-						  //document.getElementById("kek").innerHTML="";
-						  //document.getElementById("kek").innerHTML+="Type: "+(i+1)+": "+hotels[i].types[s]+"<br>";
-					  }
+					  	function setCity(string){
+						  	locationdata=(JSON.parse(string)).results;
+				    	  	console.log(locationdata);
+				    	  	var size = locationdata.length;
+						  	for(var i=0;i<size;i++)
+						  	{
+								  
+							  	if(locationdata[i].types[0]==="locality")
+							  	{
+								  	city=locationdata[i].formatted_address;
+								  	console.log("CITY: "+city);
+								  	document.getElementById("kek").innerHTML="";
+								  	document.getElementById("kek").innerHTML+="City: "+city+"<br>";
+								  	
+								  	
+							  	}
+						  	}
+					  	}
+					  	function alertContents(function_name) {
+					    	if (httpRequest.readyState === XMLHttpRequest.DONE) {
+					      		if (httpRequest.status === 200) {
+					    	  		function_name(httpRequest.responseText);
+					      		} else {
+					        		alert('There was a problem with the request.');
+					      		}
+					    	}
+					  	}
+					  	
+					  	function displayData()
+					  	{
+						  	var size=iconMarkers.length;
+						  	for(var i=0;i<size;i++)
+						  	{
+							  	iconMarkers[i].setMap(null);
+						  	}
+						  	iconMarkers=[];
+						  	var size = locationdata.length;
+						  	for(var i=0;i<size;i++)
+						  	{
+							  	var size2 = locationdata[i].types.length;
+							  	for(var s=0;s<size2;s++)
+							  	{
+								  	if(locationdata[i].types[s]==="lodging")
+								  	{
+									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_hotel}));
+								  	}
+								  	else if(locationdata[i].types[s]==="restaurant" || locationdata[i].types[s]==="bakery" || locationdata[i].types[s]==="bar" || locationdata[i].types[s]==="cafe" || locationdata[i].types[s]==="food")
+								  	{
+									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_restaurant}));
+								  	}
+							  	}
+						  	}
+							//document.getElementById("kek").innerHTML="";
+						  	//document.getElementById("kek").innerHTML+="Type: "+(i+1)+": "+hotels[i].types[s]+"<br>";
+					  	}
 					  	function displayData()
 					  	{
 						  	var size=iconMarkers.length;
@@ -200,13 +218,10 @@
 				            		marker = new google.maps.Marker({position: event.latLng, map: map, icon: pic_default});
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
-				            		makeRequest("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng());
+				            		makeRequest("https://maps.googleapis.com/maps/api/geocode/json?latlng="+marker.getPosition().lat()+","+marker.getPosition().lng()+"&key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8",setCity);
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
-				            		console.log($.get("Getdata?lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng()));
-				            		
 				        		}
 					        );
-					        makeRequest("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + marker.getPosition().lat() + "," + +marker.getPosition().lng() + "&key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8+");
 					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 					        }
 					    }
