@@ -8,9 +8,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" href = "main.css">
+        <script src = "cookies.js"></script>
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8&libraries=places"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8&libraries=places&callback=initMap"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <style>
@@ -96,6 +97,10 @@
 					    	httpRequest.open('GET', url);
 					    	httpRequest.send();
 					  	}
+					  	function setHotels(string){
+						  	locationdata=(JSON.parse(string)).results;
+						  	displayData();
+					  	}
 					  	function setCity(string){
 						  	locationdata=(JSON.parse(string)).results;
 				    	  	console.log(locationdata);
@@ -107,8 +112,8 @@
 							  	{
 								  	city=locationdata[i].formatted_address;
 								  	console.log("CITY: "+city);
-								  	document.getElementById("kek").innerHTML="";
-								  	document.getElementById("kek").innerHTML+="City: "+city+"<br>";
+								  	document.getElementById("city_id").innerHTML="";
+								  	document.getElementById("city_id").innerHTML+="City: "+city+"<br>";
 								  	
 								  	
 							  	}
@@ -167,11 +172,11 @@
 							  	{
 								  	if(locationdata[i].types[s]==="lodging")
 								  	{
-									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_hotel}));
+									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat(), lng: locationdata[i].geometry.location.lng()}, map: map, icon: pic_hotel}));
 								  	}
 								  	else if(locationdata[i].types[s]==="restaurant" || locationdata[i].types[s]==="bakery" || locationdata[i].types[s]==="bar" || locationdata[i].types[s]==="cafe" || locationdata[i].types[s]==="food")
 								  	{
-									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_restaurant}));
+									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat(), lng: locationdata[i].geometry.location.lng()}, map: map, icon: pic_restaurant}));
 								    }
 							    }
 						    }
@@ -190,6 +195,8 @@
 				            	map: map,
 				            	icon: pic_default
 					        });
+					        service = new google.maps.places.PlacesService(map);
+					        
 					        if (navigator.geolocation) {
 					        	navigator.geolocation.getCurrentPosition(function(position) {
 					            	var pos = {
@@ -219,19 +226,37 @@
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
 				            		makeRequest("https://maps.googleapis.com/maps/api/geocode/json?latlng="+marker.getPosition().lat()+","+marker.getPosition().lng()+"&key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8",setCity);
+				            		var request = {
+				            			    location: event.latLng,
+				            			    radius: '500',
+				            			    query: 'restaurant'
+				            			  };
+				            		service.textSearch(request, callback);
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				        		}
 					        );
 					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 					        }
 					    }
-					    </script>
-					    <script async defer
-					    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8&callback=initMap">
+					      function callback(results, status) {
+					    	  console.log(results);
+					    	  if (status == google.maps.places.PlacesServiceStatus.OK) {
+					    	    for (var i = 0; i < results.length; i++) {
+					    	      var place = results[i];
+					    	      locationdata=results;
+					    	      displayData();
+					    	    }
+					    	  }
+					    	}
 					    </script>
 					</div>
 				    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
-				    	<p id = "kek">kek</p>
+				    	<div class = "container_" id = "city_container">
+				    		<p id ="city_id"></p>
+				    	</div>
+				    	<div class = "container_" id = "flight_container">
+				    		
+				    	</div>
 				    </div>
 			    </div>
                 <h2 style="font-size: 210%"></h2>
