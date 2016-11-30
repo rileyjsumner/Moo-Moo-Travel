@@ -14,37 +14,7 @@
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8&libraries=places&callback=initMap"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <script>
- // Dropdown Menu
-    var dropdown = document.querySelectorAll('.dropdown');
-    var dropdownArray = Array.prototype.slice.call(dropdown,0);
-    dropdownArray.forEach(function(el){
-    	var button = el.querySelector('a[data-toggle="dropdown"]'),
-    			menu = el.querySelector('.dropdown-menu'),
-    			arrow = button.querySelector('i.icon-arrow');
-
-    	button.onclick = function(event) {
-    		if(!menu.hasClass('show')) {
-    			menu.classList.add('show');
-    			menu.classList.remove('hide');
-    			arrow.classList.add('open');
-    			arrow.classList.remove('close');
-    			event.preventDefault();
-    		}
-    		else {
-    			menu.classList.remove('show');
-    			menu.classList.add('hide');
-    			arrow.classList.remove('open');
-    			arrow.classList.add('close');
-    			event.preventDefault();
-    		}
-    	};
-    })
-
-    Element.prototype.hasClass = function(className) {
-        return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
-    };
-    </script>
+    
     <style>
 	#map {
 	   margin-left: 2px;
@@ -282,6 +252,7 @@
 					    </script>
 					</div>
 				    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
+				    <div class="container">
 				    	<ul>
 						    <li class="dropdown">
 						      	<a href="#" data-toggle="dropdown">Location<i class="icon-arrow"></i></a>
@@ -339,7 +310,38 @@
 						    </li>
 					  	</ul>
 				    	<p id ="city_id"></p>
+				    	</div>
 				    </div>
+				    <script>
+					    var dropdown = document.querySelectorAll('.dropdown');
+					    var dropdownArray = Array.prototype.slice.call(dropdown,0);
+					    dropdownArray.forEach(function(el){
+					    	var button = el.querySelector('a[data-toggle="dropdown"]'),
+					    			menu = el.querySelector('.dropdown-menu'),
+					    			arrow = button.querySelector('i.icon-arrow');
+					
+					    	button.onclick = function(event) {
+					    		if(!menu.hasClass('show')) {
+					    			menu.classList.add('show');
+					    			menu.classList.remove('hide');
+					    			arrow.classList.add('open');
+					    			arrow.classList.remove('close');
+					    			event.preventDefault();
+					    		}
+					    		else {
+					    			menu.classList.remove('show');
+					    			menu.classList.add('hide');
+					    			arrow.classList.remove('open');
+					    			arrow.classList.add('close');
+					    			event.preventDefault();
+					    		}
+					    	};
+					    })
+					
+					    Element.prototype.hasClass = function(className) {
+					        return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
+					    };
+				    </script>
 			    </div>
                 <h2 style="font-size: 210%"></h2>
                 <p style="font-size: 150%"></p>
