@@ -27,7 +27,7 @@ import java.util.List;
 
 public class Getdata extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    
+    private static final String apiKey="AIzaSyCRjhH9N48NhWnwxBlX6Jii4a7DFp4NJ8o";
     public Getdata() {
         super();
     }
@@ -40,22 +40,64 @@ public class Getdata extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+    	String action =request.getParameter("action");
     	String lat = request.getParameter("lat");
     	String lng = request.getParameter("lng");
+    	
     	System.out.println("Lat: "+lat+", "+"Lng: "+lng);
+    	
     	String forward;
         URL url;
+        
         InputStream is = null;
         BufferedReader br;
+        
         String line;
         String data="";
         
-        //VERIFY A GET REQUEST IS HAPPENING
         System.out.println("GET REQUEST!");
+        boolean returndata=true;
+        String urlstr="";
         
+        if(action==null)
+        {
+        	returndata=false;
+        }
+        else if(action.equals("city"))
+        {
+        	urlstr="https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key="+apiKey;
+        }
+        else if(action.equals("restaurants"))
+        {
+        	urlstr="https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key="+apiKey;
+        }
+        else if(action.equals("hotels"))
+        {
+        	
+        }
+        else if(action.equals("parks"))
+        {
+        	
+        }
+        else if(action.equals("bars"))
+        {
+        	
+        }
+        else if(action.equals("cars"))
+        {
+        	
+        }
+        else if(action.equals("airports"))
+        {
+        	
+        }
+        else if(action.equals("amusement"))
+        {
+        	
+        }
         // FETCH DATA FROM GOOGLE API
         try {
-        	String urlstr="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+lat+","+lng+"&radius=50000&key=AIzaSyCRjhH9N48NhWnwxBlX6Jii4a7DFp4NJ8o";
+        	
             url = new URL(urlstr);
             System.out.println(urlstr);
             is = url.openStream();
@@ -107,7 +149,7 @@ public class Getdata extends HttpServlet {
 			e.printStackTrace();
 		}
         request.setAttribute("data", data);
-        forward = "/empty.jsp";//WRONG
+        forward = "/result.jsp";//WRONG
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
