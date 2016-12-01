@@ -83,9 +83,11 @@
 					<script type="text/javascript">
 						var city="";
 						var pic_default = 'pics/default.png';
-					    var pic_hotel = 'pics/lodging_0star.png';
-					    var pic_restaurant = 'pics/restaurant.png';
+						var pic_hotel = 'pics/lodging_0star.png';
+						var pic_restaurant = 'pics/restaurant.png';
+						var pic_park = 'pics/forestgump.png'
 					  	var httpRequest;
+						var eventdata=[];
 						var locationdata;
 						var iconMarkers=[];
 					  	function makeRequest(url,function_name) {
@@ -130,58 +132,45 @@
 					    	}
 					  	}
 					  	
-					  	function displayData()
+					  	function displayData(type)
 					  	{
-						  	var size=iconMarkers.length;
+					  		var seticon;
+					  		if (type="restaurants")
+					  		{
+					  			seticon=pic_restaurant;
+					  		}
+					  		else if (type="hotels")
+					  		{
+					  			seticon=pic_hotel;
+					  		}
+					  		else if (type="parks")
+					  		{
+					  			seticon=pic_park;
+					  		}
+					  		else{
+					  			console.log("TYPE NOT FOUND! TYPE NOT FOUND! TYPE=\""+type+"\".")
+					  		}
+					  		if(iconMarkers[type]==null){
+					  			iconMarkers[type]=[];
+					  		}
+						  	var size=iconMarkers[type].length;
 						  	for(var i=0;i<size;i++)
 						  	{
-							  	iconMarkers[i].setMap(null);
+							  	iconMarkers[type][i].setMap(null);
 						  	}
-						  	iconMarkers=[];
-						  	var size = locationdata.length;
+						  	iconMarkers[type]=[];
+						  	if(eventdata[type]==null){
+						  		eventdata[type]=[];
+					  		}
+						  	size = eventdata[type].length;
 						  	for(var i=0;i<size;i++)
 						  	{
-							  	var size2 = locationdata[i].types.length;
-							  	for(var s=0;s<size2;s++)
-							  	{
-								  	if(locationdata[i].types[s]==="lodging")
-								  	{
-									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_hotel}));
-								  	}
-								  	else if(locationdata[i].types[s]==="restaurant" || locationdata[i].types[s]==="bakery" || locationdata[i].types[s]==="bar" || locationdata[i].types[s]==="cafe" || locationdata[i].types[s]==="food")
-								  	{
-									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat, lng: locationdata[i].geometry.location.lng}, map: map, icon: pic_restaurant}));
-								  	}
-							  	}
+						  		console.log("ICON: type="+type);
+								iconMarkers[type].push(new google.maps.Marker({position: {lat: eventdata[type][i].geometry.location.lat(), lng: eventdata[type][i].geometry.location.lng()}, map: map, icon: seticon}));
 						  	}
 							//document.getElementById("kek").innerHTML="";
 						  	//document.getElementById("kek").innerHTML+="Type: "+(i+1)+": "+hotels[i].types[s]+"<br>";
 					  	}
-					  	function displayData()
-					  	{
-						  	var size=iconMarkers.length;
-						  	for(var i=0;i<size;i++)
-						  	{
-								iconMarkers[i].setMap(null);
-						  	}
-						 	iconMarkers=[];
-						 	var size = locationdata.length;
-						 	for(var i=0;i<size;i++)
-						  	{
-							  	var size2 = locationdata[i].types.length;
-							  	for(var s=0;s<size2;s++)
-							  	{
-								  	if(locationdata[i].types[s]==="lodging")
-								  	{
-									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat(), lng: locationdata[i].geometry.location.lng()}, map: map, icon: pic_hotel}));
-								  	}
-								  	else if(locationdata[i].types[s]==="restaurant" || locationdata[i].types[s]==="bakery" || locationdata[i].types[s]==="bar" || locationdata[i].types[s]==="cafe" || locationdata[i].types[s]==="food")
-								  	{
-									  	iconMarkers.push(new google.maps.Marker({position: {lat: locationdata[i].geometry.location.lat(), lng: locationdata[i].geometry.location.lng()}, map: map, icon: pic_restaurant}));
-								    }
-							    }
-						    }
-					    }
 					    var marker;
 					    var map;
 					    var service;
@@ -226,29 +215,35 @@
 				            		marker = new google.maps.Marker({position: event.latLng, map: map, icon: pic_default});
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
-				            		makeRequest("https://maps.googleapis.com/maps/api/geocode/json?latlng="+marker.getPosition().lat()+","+marker.getPosition().lng()+"&key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8",setCity);
-				            		var request = {
-				            			    location: event.latLng,
-				            			    radius: '500',
-				            			    query: 'restaurant'
-				            			  };
-				            		service.textSearch(request, callback);
+				            		makeRequest("Getdata?action=city&lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng(),setCity);
+				            		var request = {location: event.latLng,radius: '500',query: 'restaurant'};
+				            		service.textSearch(request, callback_restaurants);
+				            		request = {location: event.latLng,radius: '500',query: 'hotel'};
+				            		service.textSearch(request, callback_hotels);
+				            		request = {location: event.latLng,radius: '500',query: 'park'};
+				            		service.textSearch(request, callback_parks);
+				            		
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				        		}
 					        );
-					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-					        }
+					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {}
 					    }
-					      function callback(results, status) {
-					    	  console.log(results);
-					    	  if (status == google.maps.places.PlacesServiceStatus.OK) {
-					    	    for (var i = 0; i < results.length; i++) {
-					    	      var place = results[i];
-					    	      locationdata=results;
-					    	      displayData();
-					    	    }
-					    	  }
+					    
+					    function callback_parks(results,status){callback(results,status,"parks");}
+					    function callback_restaurants(results,status){callback(results,status,"restaurants");}
+					    function callback_hotels(results,status){callback(results,status,"hotels");}
+					    
+						function callback(results, status, type) {
+					    	console.log(type);
+					    	console.log(results);
+					    	if (status == google.maps.places.PlacesServiceStatus.OK) {
+					    		for (var i = 0; i < results.length; i++) {
+					    			var place = results[i];
+					    			eventdata[type]=results;
+					    			displayData(type);
+					 			}
 					    	}
+						}
 					    </script>
 					</div>
 				    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
