@@ -134,22 +134,24 @@
 					  	
 					  	function displayData(type)
 					  	{
+					  		console.log("displayData("+type+")");
 					  		var seticon;
-					  		if (type="restaurants")
+					  		if (type==="restaurants")
 					  		{
 					  			seticon=pic_restaurant;
 					  		}
-					  		else if (type="hotels")
+					  		else if (type==="hotels")
 					  		{
 					  			seticon=pic_hotel;
 					  		}
-					  		else if (type="parks")
+					  		else if (type==="parks")
 					  		{
 					  			seticon=pic_park;
 					  		}
 					  		else{
 					  			console.log("TYPE NOT FOUND! TYPE NOT FOUND! TYPE=\""+type+"\".")
 					  		}
+					  		console.log("ICON=\""+seticon+"\"");
 					  		if(iconMarkers[type]==null){
 					  			iconMarkers[type]=[];
 					  		}
@@ -159,7 +161,8 @@
 							  	iconMarkers[type][i].setMap(null);
 						  	}
 						  	iconMarkers[type]=[];
-						  	if(eventdata[type]==null){
+						  	if(eventdata[type]==null)
+						  	{
 						  		eventdata[type]=[];
 					  		}
 						  	size = eventdata[type].length;
@@ -168,8 +171,6 @@
 						  		console.log("ICON: type="+type);
 								iconMarkers[type].push(new google.maps.Marker({position: {lat: eventdata[type][i].geometry.location.lat(), lng: eventdata[type][i].geometry.location.lng()}, map: map, icon: seticon}));
 						  	}
-							//document.getElementById("kek").innerHTML="";
-						  	//document.getElementById("kek").innerHTML+="Type: "+(i+1)+": "+hotels[i].types[s]+"<br>";
 					  	}
 					    var marker;
 					    var map;
@@ -216,12 +217,15 @@
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
 				            		makeRequest("Getdata?action=city&lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng(),setCity);
-				            		var request = {location: event.latLng,radius: '500',query: 'restaurant'};
-				            		service.textSearch(request, callback_restaurants);
-				            		request = {location: event.latLng,radius: '500',query: 'hotel'};
-				            		service.textSearch(request, callback_hotels);
-				            		request = {location: event.latLng,radius: '500',query: 'park'};
-				            		service.textSearch(request, callback_parks);
+				            		var request = {location: event.latLng,radius: '1500',type: 'restaurant'};
+				            		console.log("Called Restaurants");
+				            		service.radarSearch(request, callback_restaurants);
+				            		request = {location: event.latLng,radius: '1500',type: 'lodging'};
+				            		console.log("Called Lodging");
+				            		service.radarSearch(request, callback_hotels);
+				            		request = {location: event.latLng,radius: '1500',type: 'park'};
+				            		console.log("Called Parks");
+				            		service.radarSearch(request, callback_parks);
 				            		
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				        		}
@@ -229,19 +233,29 @@
 					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {}
 					    }
 					    
-					    function callback_parks(results,status){callback(results,status,"parks");}
-					    function callback_restaurants(results,status){callback(results,status,"restaurants");}
-					    function callback_hotels(results,status){callback(results,status,"hotels");}
+					    function callback_parks(results,status)
+					    {
+					    	console.log("Callback: PARKS");
+					    	callback(results,status,"parks");
+					    }
+					    function callback_restaurants(results,status)
+					    {
+					    	console.log("Callback: RESTAURANTS");
+					    	callback(results,status,"restaurants");
+					    }
+					    function callback_hotels(results,status)
+					    {
+					    	console.log("Callback: HOTELS");
+					    	callback(results,status,"hotels");
+					    }
 					    
 						function callback(results, status, type) {
+							console.log("CALLBACK")
 					    	console.log(type);
 					    	console.log(results);
 					    	if (status == google.maps.places.PlacesServiceStatus.OK) {
-					    		for (var i = 0; i < results.length; i++) {
-					    			var place = results[i];
-					    			eventdata[type]=results;
-					    			displayData(type);
-					 			}
+				    			eventdata[type]=results;
+				    			displayData(type);
 					    	}
 						}
 					    </script>
