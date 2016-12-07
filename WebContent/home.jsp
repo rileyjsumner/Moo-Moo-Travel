@@ -7,7 +7,7 @@
         <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel = "stylesheet" href = "main.css">
+        <link rel = "stylesheet" href = "main.css" type="text/css">
         <script src = "cookies.js"></script>
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -247,96 +247,72 @@
 					    </script>
 					</div>
 				    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
-				    <div class="container">
-				    	<ul>
-						    <li class="dropdown">
-						      	<a href="#" data-toggle="dropdown">Location<i class="icon-arrow"></i></a>
-						      	<ul class="dropdown-menu">
-						        	<li><a href="#">Home</a></li>
-						        	<li><a href="#">About Us</a></li>
-						        	<li><a href="#">Services</a></li>
-						        	<li><a href="#">Contact</a></li>
-						      	</ul>
-						    </li>
-						    <li class="dropdown">
-						      	<a href="#" data-toggle="dropdown">Flight<i class="icon-arrow"></i></a>
-						      	<ul class="dropdown-menu">
-							        <li><a href="#">Home</a></li>
-							        <li><a href="#">About Us</a></li>
-							        <li><a href="#">Services</a></li>
-							        <li><a href="#">Contact</a></li>
-						      	</ul>
-						    </li>
-						    <li class="dropdown">
-						      	<a href="#" data-toggle="dropdown">Hotel<i class="icon-arrow"></i></a>
-						      	<ul class="dropdown-menu">
-							        <li><a href="#">Home</a></li>
-							        <li><a href="#">About Us</a></li>
-							        <li><a href="#">Services</a></li>
-							        <li><a href="#">Contact</a></li>
-						      	</ul>
-						    </li>
-						    <li class="dropdown">
-						      	<a href="#" data-toggle="dropdown">Rental Car<i class="icon-arrow"></i></a>
-						      	<ul class="dropdown-menu">
-							        <li><a href="#">Home</a></li>
-							        <li><a href="#">About Us</a></li>
-							        <li><a href="#">Services</a></li>
-							        <li><a href="#">Contact</a></li>
-						      	</ul>
-						    </li>
-						    <li class="dropdown">
-						      	<a href="#" data-toggle="dropdown">Restaurants<i class="icon-arrow"></i></a>
-						      	<ul class="dropdown-menu">
-							        <li><a href="#">Home</a></li>
-							        <li><a href="#">About Us</a></li>
-							        <li><a href="#">Services</a></li>
-							        <li><a href="#">Contact</a></li>
-						      	</ul>
-						    </li>
-						    <li class="dropdown">
-						      	<a href="#" data-toggle="dropdown">Entertainment<i class="icon-arrow"></i></a>
-						      	<ul class="dropdown-menu">
-							        <li><a href="#">Home</a></li>
-							        <li><a href="#">About Us</a></li>
-							        <li><a href="#">Services</a></li>
-							        <li><a href="#">Contact</a></li>
-						      	</ul>
-						    </li>
-					  	</ul>
-				    	<p id ="city_id"></p>
-				    	</div>
-				    </div>
 				    <script>
-					    var dropdown = document.querySelectorAll('.dropdown');
-					    var dropdownArray = Array.prototype.slice.call(dropdown,0);
-					    dropdownArray.forEach(function(el){
-					    	var button = el.querySelector('a[data-toggle="dropdown"]'),
-					    			menu = el.querySelector('.dropdown-menu'),
-					    			arrow = button.querySelector('i.icon-arrow');
-					
-					    	button.onclick = function(event) {
-					    		if(!menu.hasClass('show')) {
-					    			menu.classList.add('show');
-					    			menu.classList.remove('hide');
-					    			arrow.classList.add('open');
-					    			arrow.classList.remove('close');
-					    			event.preventDefault();
-					    		}
-					    		else {
-					    			menu.classList.remove('show');
-					    			menu.classList.add('hide');
-					    			arrow.classList.remove('open');
-					    			arrow.classList.add('close');
-					    			event.preventDefault();
-					    		}
-					    	};
-					    })
-					
-					    Element.prototype.hasClass = function(className) {
-					        return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
-					    };
-				    </script>
+				 // Dropdown Menu
+				    var dropdown = document.querySelectorAll('.dropdown');
+				    var dropdownArray = Array.prototype.slice.call(dropdown,0);
+				    dropdownArray.forEach(function(el){
+				    	var button = el.querySelector('a[data-toggle="dropdown"]'),
+				    			menu = el.querySelector('.dropdown-menu'),
+				    			arrow = button.querySelector('i.icon-arrow');
+
+				    	button.onclick = function(event) {
+				    		if(!menu.hasClass('show')) {
+				    			menu.classList.add('show');
+				    			menu.classList.remove('hide');
+				    			arrow.classList.add('open');
+				    			arrow.classList.remove('close');
+				    			event.preventDefault();
+				    		}
+				    		else {
+				    			menu.classList.remove('show');
+				    			menu.classList.add('hide');
+				    			arrow.classList.remove('open');
+				    			arrow.classList.add('close');
+				    			event.preventDefault();
+				    		}
+				    	};
+				    })
+
+				    Element.prototype.hasClass = function(className) {
+				        return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
+				    };</script>
+				    <div class="container">
+						  <h1 class="title">Dropdown Menu</h1>
+						  <ul>
+						    <li class="dropdown">
+						      <a href="#" data-toggle="dropdown">First Menu <i class="icon-arrow"></i></a>
+						      <ul class="dropdown-menu">
+						        <li><a href="#">Home</a></li>
+						        <li><a href="#">About Us</a></li>
+						        <li><a href="#">Services</a></li>
+						        <li><a href="#">Contact</a></li>
+						      </ul>
+						    </li>
+						    <li class="dropdown">
+						      <a href="#" data-toggle="dropdown">Second Menu <i class="icon-arrow"></i></a>
+						      <ul class="dropdown-menu">
+						        <li><a href="#">Home</a></li>
+						        <li><a href="#">About Us</a></li>
+						        <li><a href="#">Services</a></li>
+						        <li><a href="#">Contact</a></li>
+						      </ul>
+						    </li>
+						    <li class="dropdown">
+						      <a href="#" data-toggle="dropdown">Third Menu <i class="icon-arrow"></i></a>
+						      <ul class="dropdown-menu">
+						        <li><a href="#">Home</a></li>
+						        <li><a href="#">About Us</a></li>
+						        <li><a href="#">Services</a></li>
+						        <li><a href="#">Contact</a></li>
+						      </ul>
+						    </li>
+						  </ul>
+						  <p class="text-center">
+						    See this same menu only with CSS3: <a href="http://cssdeck.com/labs/only-css3-dropdown-menu" target="_blank">http://cssdeck.com/labs/only-css3-dropdown-menu</a>
+						  </p>
+						</div>
+			<p id="city_id"></p>    
 			    </div>
                 <h2 style="font-size: 210%"></h2>
                 <p style="font-size: 150%"></p>

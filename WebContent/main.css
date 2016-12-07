@@ -4271,6 +4271,24 @@ body {
 	border-sizing: border-box;
 }
 
+@import url("http://fonts.googleapis.com/css?family=Lato:300,400,700,900");
+@import url(http://fonts.googleapis.com/css?family=Pacifico);
+
+body {
+	font-family: "Lato", Helvetica, Arial;
+	font-size: 16px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+*, *:before, *:after {
+	-webkit-border-sizing: border-box;
+	-moz-border-sizing: border-box;
+	border-sizing: border-box;
+}
+
 .container {
 	width: 350px;
 	margin: 50px auto;
@@ -4282,6 +4300,9 @@ body {
   }
 }
 
+// =============================================================================
+//	Mixins and Variables
+// =============================================================================
 
 $blue: #2980B9;
 $gray: #EEE;
