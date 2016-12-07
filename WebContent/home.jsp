@@ -136,15 +136,15 @@
 					  	{
 					  		console.log("displayData("+type+")");
 					  		var seticon;
-					  		if (type="restaurants")
+					  		if (type==="restaurants")
 					  		{
 					  			seticon=pic_restaurant;
 					  		}
-					  		else if (type="hotels")
+					  		else if (type==="hotels")
 					  		{
 					  			seticon=pic_hotel;
 					  		}
-					  		else if (type="parks")
+					  		else if (type==="parks")
 					  		{
 					  			seticon=pic_park;
 					  		}
@@ -217,12 +217,15 @@
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
 				            		makeRequest("Getdata?action=city&lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng(),setCity);
-				            		var request = {location: event.latLng,radius: '750',query: 'restaurant'};
-				            		service.textSearch(request, callback_restaurants);
-				            		request = {location: event.latLng,radius: '750',query: 'lodging'};
-				            		service.textSearch(request, callback_hotels);
-				            		request = {location: event.latLng,radius: '750',query: 'park'};
-				            		service.textSearch(request, callback_parks);
+				            		var request = {location: event.latLng,radius: '1500',type: 'restaurant'};
+				            		console.log("Called Restaurants");
+				            		service.radarSearch(request, callback_restaurants);
+				            		request = {location: event.latLng,radius: '1500',type: 'lodging'};
+				            		console.log("Called Lodging");
+				            		service.radarSearch(request, callback_hotels);
+				            		request = {location: event.latLng,radius: '1500',type: 'park'};
+				            		console.log("Called Parks");
+				            		service.radarSearch(request, callback_parks);
 				            		
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				        		}
