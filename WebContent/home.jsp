@@ -9,7 +9,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" href = "main.css" type="text/css">
         <script src = "cookies.js"></script>
-        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!--<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8&libraries=places&callback=initMap"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -261,73 +262,64 @@
 					    </script>
 					</div>
 				    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
-				    <script>
-				 // Dropdown Menu
-				    var dropdown = document.querySelectorAll('.dropdown');
-				    var dropdownArray = Array.prototype.slice.call(dropdown,0);
-				    dropdownArray.forEach(function(el){
-				    	var button = el.querySelector('a[data-toggle="dropdown"]'),
-				    			menu = el.querySelector('.dropdown-menu'),
-				    			arrow = button.querySelector('i.icon-arrow');
-
-				    	button.onclick = function(event) {
-				    		if(!menu.hasClass('show')) {
-				    			menu.classList.add('show');
-				    			menu.classList.remove('hide');
-				    			arrow.classList.add('open');
-				    			arrow.classList.remove('close');
-				    			event.preventDefault();
-				    		}
-				    		else {
-				    			menu.classList.remove('show');
-				    			menu.classList.add('hide');
-				    			arrow.classList.remove('open');
-				    			arrow.classList.add('close');
-				    			event.preventDefault();
-				    		}
-				    	};
-				    })
-
-				    Element.prototype.hasClass = function(className) {
-				        return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
-				    };</script>
-				    <div class="container">
-						  <h1 class="title">Dropdown Menu</h1>
-						  <ul>
-						    <li class="dropdown">
-						      <a href="#" data-toggle="dropdown">First Menu <i class="icon-arrow"></i></a>
-						      <ul class="dropdown-menu">
-						        <li><a href="#">Home</a></li><button name="hotel" action="document.location.href='meme'">Save</button>
-						        <li><a href="#">About Us</a></li>
-						        <li><a href="#">Services</a></li>
-						        <li><a href="#">Contact</a></li>
+				    <div class="hh_drop_down">
+						<ul class="hh_main">
+						
+						   <li class="hh_main_menu">
+						    <a href="javascript:void(0);" class="hh_sf">Chemicals</a>
+						     <ul class="hh_inner">
+						        <li><a href="#">Additives / Boosters</a></li>
+						        <li><a href="#">Anti-Allergen</a></li>
+						        <li><a href="#">Concrete</a></li>
+						    </ul>
+						  </li>
+						
+						  <li  class="hh_main_menu" >
+						    <a class="hh_sf" href="#">Equipment</a>
+						      <ul class="hh_inner">
+						        <li><a href="#">Deodorization</a></li>
+						        <li><a href="#">Duct Cleaning Equipment</a></li>
+						        <li><a href="#">Hard Surface</a></li>
+						     </ul>
+						
+						  </li>
+						
+						   <li  class="hh_main_menu" >
+						     <a class="hh_sf" href="#">Accessories</a>
+						      <ul class="hh_inner">
+						          <li><a href="#">Bonnets/Pads</a></li>
+						          <li><a href="#">Brush/Rake/Sponge</a></li>
+						        <li><a href="#">Carpet Rakes</a></li>
 						      </ul>
-						    </li>
-						    <li class="dropdown">
-						      <a href="#" data-toggle="dropdown">Second Menu <i class="icon-arrow"></i></a>
-						      <ul class="dropdown-menu">
-						        <li><a href="#">Home</a></li>
-						        <li><a href="#">About Us</a></li>
-						        <li><a href="#">Services</a></li>
-						        <li><a href="#">Contact</a></li>
-						      </ul>
-						    </li>
-						    <li class="dropdown">
-						      <a href="#" data-toggle="dropdown">Third Menu <i class="icon-arrow"></i></a>
-						      <ul class="dropdown-menu">
-						        <li><a href="#">Home</a></li>
-						        <li><a href="#">About Us</a></li>
-						        <li><a href="#">Services</a></li>
-						        <li><a href="#">Contact</a></li>
-						      </ul>
-						    </li>
-						  </ul>
-						  <p class="text-center">
-						    See this same menu only with CSS3: <a href="http://cssdeck.com/labs/only-css3-dropdown-menu" target="_blank">http://cssdeck.com/labs/only-css3-dropdown-menu</a>
-						  </p>
-						</div>
+						   </li>
+						
+						</ul>
+					</div>
+			<script>
+			$(".hh_sf").next().addClass("collapsed").slideUp();
+			
+			$(".hh_main").on('click', '.hh_sf', function (event) {
+			            event.preventDefault();
+			            var currentClass = $(this).next().prop('class');
+			            if (currentClass == "hh_inner expanded") {
+			                $(this).next().removeClass("expanded");
+			                $(this).next().addClass("collapsed");
+			                $(this).next().slideUp();
+			            } else {
+			                $(".expanded").slideUp().addClass("collapsed").removeClass("expanded");
+			
+			                $(this).next().removeClass("collapsed");
+			                $(this).next().addClass("expanded");
+			                $(this).next().slideDown();
+			            }
+			
+			        });
+			</script>
 			<p id="city_id"></p>    
-			    </div>
+			</div>
+			</div>
+			<div class="row">
+				<div class="col-1" style="width: 90%; margin-left: 35px;">
                 <h2 style="font-size: 210%"></h2>
                 <p style="font-size: 150%"></p>
                 <p style="font-size: 150%">Map^^</p>
@@ -335,5 +327,7 @@
                 <p style="font-size: 110%">Anoka's BPA Chapter Number 30-0005</p>
              </div>
          </div>
+         </div>
+    	</div>
     </body>
 </html>
