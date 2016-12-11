@@ -8,6 +8,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" href = "main.css" type="text/css">
+        <link rel = "stylesheet" href = "dropdown.css" type = "text/css">
         <script src = "cookies.js"></script>
         <!--<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -266,30 +267,36 @@
 						<ul class="hh_main">
 						
 						   <li class="hh_main_menu">
-						    <a href="javascript:void(0);" class="hh_sf">Chemicals</a>
+						    <a href="javascript:void(0);" class="hh_sf">Flights</a>
 						     <ul class="hh_inner">
-						        <li><a href="#">Additives / Boosters</a></li>
-						        <li><a href="#">Anti-Allergen</a></li>
-						        <li><a href="#">Concrete</a></li>
+						        <li><a href="#">MSP -> CHG</a></li>
 						    </ul>
 						  </li>
 						
 						  <li  class="hh_main_menu" >
-						    <a class="hh_sf" href="#">Equipment</a>
+						    <a class="hh_sf" href="#">Hotels</a>
 						      <ul class="hh_inner">
-						        <li><a href="#">Deodorization</a></li>
-						        <li><a href="#">Duct Cleaning Equipment</a></li>
-						        <li><a href="#">Hard Surface</a></li>
+						        <li><a href="#">Sheraton Hotel</a></li>
 						     </ul>
 						
 						  </li>
 						
 						   <li  class="hh_main_menu" >
-						     <a class="hh_sf" href="#">Accessories</a>
+						     <a class="hh_sf" href="#">Rental Cars</a>
 						      <ul class="hh_inner">
-						          <li><a href="#">Bonnets/Pads</a></li>
-						          <li><a href="#">Brush/Rake/Sponge</a></li>
-						        <li><a href="#">Carpet Rakes</a></li>
+						          <li><a href="#">Enterprise</a></li>
+						      </ul>
+						   </li>
+						   <li  class="hh_main_menu" >
+						     <a class="hh_sf" href="#">Restaurants</a>
+						      <ul class="hh_inner">
+						          <li><a href="#">Trump Steaks</a></li>
+						      </ul>
+						   </li>
+						   <li  class="hh_main_menu" >
+						     <a class="hh_sf" href="#">Entertainment</a>
+						      <ul class="hh_inner">
+						          <li><a href="#">Parks</a></li>
 						      </ul>
 						   </li>
 						
