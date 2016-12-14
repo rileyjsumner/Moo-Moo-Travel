@@ -1,28 +1,35 @@
 @CHARSET "UTF-8";
-
+p{
+	margin:0;
+}
 .hh_main_menu {
+	cursor: pointer;
+	user-select:none;
 	background-color: blue;
 	z-index: 2;
 	list-style-type: none;
 }
 .hh_sf {
+	cursor: pointer;
+	user-select:none;
 	text-decoration: none;
 	color: white;
 	font-size: 24px;
 }
-.hh_main_menu a:visited, a:link {
+.hh_main_menu p:visited, p:link {
+	user-select:none;
 	color: white;
-}
-.hh_main_menu a:hover {
-	color: white;
-	text-decoration: none;
+	cursor: pointer;
 }
 .hh_inner {
+	cursor: pointer;
+	user-select:none;
 	z-index: 0;
 	background-color: green;
 	list-style-type: none;
 }
-.hh_inner a {
+.hh_inner p {
+	user-select:none;
 	color: black;
 	z-index: 1;
 }

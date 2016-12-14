@@ -301,37 +301,37 @@
 				    <div class="hh_drop_down">
 						<ul class="hh_main">
 						
-						   <li class="hh_main_menu">
-						    <a href="javascript:void(0);" class="hh_sf">Flights</a>
-						     <ul class="hh_inner">
-						        <li><a href="#">MSP -> CHG</a></li>
+						   <li id="flights_menu" class="hh_main_menu">
+						    <p class="hh_sf">Flights</p>
+						     <ul id="flights_anchor" class="hh_inner">
+						        <li><p>MSP -> CHG</p></li>
 						    </ul>
 						  </li>
 						
-						  <li  class="hh_main_menu" >
-						    <a class="hh_sf" href="#">Hotels</a>
-						      <ul class="hh_inner">
-						        <li><a href="#">Sheraton Hotel</a></li>
+						  <li id="hotels_menu" class="hh_main_menu" >
+						    <p class="hh_sf" >Hotels</p>
+						      <ul id="hotels_anchor" class="hh_inner">
+						        <li><p>Sheraton Hotel</p></li>
 						     </ul>
 						
 						  </li>
 						
-						   <li  class="hh_main_menu" >
-						     <a class="hh_sf" href="#">Rental Cars</a>
-						      <ul class="hh_inner">
-						          <li><a href="#">Enterprise</a></li>
+						   <li id="cars_menu" class="hh_main_menu" >
+						     <p class="hh_sf" >Rental Cars</p>
+						      <ul id="cars_anchor" class="hh_inner">
+						          <li><p>Enterprise</p></li>
 							</ul>
 						   </li>
-						   <li  class="hh_main_menu" >
-						     <a class="hh_sf" href="#">Restaurants</a>
-						      <ul class="hh_inner">
-						          <li><a href="#">Trump Steaks</a></li>
+						   <li id="restaurants_menu" class="hh_main_menu" >
+						     <p class="hh_sf">Restaurants</p>
+						      <ul id="restaurants_anchor" class="hh_inner">
+						          <li><p>Trump Steaks</p></li>
 						      </ul>
 						   </li>
-						   <li  class="hh_main_menu" >
-						     <a class="hh_sf" href="#">Entertainment</a>
-						      <ul class="hh_inner">
-						          <li><a href="#">Parks</a></li>
+						   <li id="entertainment_menu" class="hh_main_menu" >
+						     <p class="hh_sf">Entertainment</p>
+						      <ul id="entertainment_anchor" class="hh_inner">
+						          <li><p>Parks</p></li>
 						      </ul>
 						   </li>
 						
@@ -357,14 +357,36 @@
 			
 			        });
 			</script>
+			<script type="text/javascript">
+				function newRestaurant(text){ newElement(document.getElementById("restaurants_anchor"),text); }
+				function newAnchor(text){ newElement(document.getElementById("flights_anchor"),text); }
+				function newEntertainment(){ newElement(document.getElementById("entertainment_anchor"),text); }
+				function newCar(text){ newElement(document.getElementById("cars_anchor"),text); }
+				function newHotel(text){ newElement(document.getElementById("hotels_anchor"),text); }
+				function newFlight(text){ newElement(document.getElementById("flights_anchor"),text); }
+				
+				function newElement(anchor,text)
+				{
+					var newNumberListItem = document.createElement("li");
+
+                    //create new text node
+		            var numberListValue = document.createTextNode(text);
+		
+		                    //add text node to li element
+		            newNumberListItem.appendChild(numberListValue);
+		
+		                    //add new list element built in previous steps to unordered list
+		                    //called numberList
+		            anchor.appendChild(newNumberListItem);
+				}
+			
+			</script>
 			<p id="city_id"></p>    
 			</div>
 			</div>
 			<div class="row">
 				<div class="col-1" style="width: 90%; margin-left: 35px;">
                 <h2 style="font-size: 210%"></h2>
-                <p style="font-size: 150%"></p>
-                <p style="font-size: 150%">Map^^</p>
                 <p style="font-size: 110%">Moo Moo Travel was created by Team A: Sam Scheidecker and Riley Sumner</p>
                 <p style="font-size: 110%">Anoka's BPA Chapter Number 30-0005</p>
              </div>
