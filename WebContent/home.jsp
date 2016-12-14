@@ -234,7 +234,10 @@
 					        );
 					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {}
 					    }
-					    
+					      //marker.addListener('click', function() {
+					      //    map.setZoom(8);
+					      //    map.setCenter(marker.getPosition());
+					      //  });
 					    function callback_parks(results,status)
 					    {
 					    	console.log("Callback: PARKS");
