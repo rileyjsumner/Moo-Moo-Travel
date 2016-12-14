@@ -294,18 +294,7 @@
 				    Element.prototype.hasClass = function(className) {
 				        return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
 				    };</script>
-				    <div class="container">
-						  <h1 class="title">Dropdown Menu</h1>
-						  <ul>
-						    <li class="dropdown">
-						      <a href="#" data-toggle="dropdown">First Menu <i class="icon-arrow"></i></a>
-						      <ul class="dropdown-menu">
-						        <li><a href="#">Home</a></li>
-						        <li><a href="#">About Us</a></li>
-						        <li><a href="#">Services</a></li>
-						        <li><a href="#">Contact</a></li>
-					        </ul>
-				        </ul>
+				    
 				    <div class="hh_drop_down">
 						<ul class="hh_main">
 						
