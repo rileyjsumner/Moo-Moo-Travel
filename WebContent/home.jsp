@@ -7,7 +7,6 @@
         <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel = "stylesheet" href = "main.css" type="text/css">
         <link rel = "stylesheet" href = "dropdown.css" type = "text/css">
         <script src = "cookies.js"></script>
         <!--<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
@@ -24,6 +23,7 @@
 	   height: 600px;
 	   background-color: grey;
 	}
+	
  	.row {
 	    z-index: -1;
 	    margin-left: -15px;
@@ -328,8 +328,6 @@
 			<div class="row">
 				<div class="col-1" style="width: 90%; margin-left: 35px;">
                 <h2 style="font-size: 210%"></h2>
-                <p style="font-size: 150%"></p>
-                <p style="font-size: 150%">Map^^</p>
                 <p style="font-size: 110%">Moo Moo Travel was created by Team A: Sam Scheidecker and Riley Sumner</p>
                 <p style="font-size: 110%">Anoka's BPA Chapter Number 30-0005</p>
              </div>
