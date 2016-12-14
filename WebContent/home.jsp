@@ -263,7 +263,7 @@
 					    </script>
 					</div>
 				    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
-
+<<<<<<< HEAD
 				    <script>
 				 // Dropdown Menu
 				    var dropdown = document.querySelectorAll('.dropdown');
@@ -304,8 +304,7 @@
 						        <li><a href="#">About Us</a></li>
 						        <li><a href="#">Services</a></li>
 						        <li><a href="#">Contact</a></li>
-								</ul>
-							</ul>
+=======
 				    <div class="hh_drop_down">
 						<ul class="hh_main">
 						
@@ -328,6 +327,7 @@
 						     <a class="hh_sf" href="#">Rental Cars</a>
 						      <ul class="hh_inner">
 						          <li><a href="#">Enterprise</a></li>
+>>>>>>> 9bfd1e870a8fe7ab1f244a44d18c528f15dec2da
 						      </ul>
 						   </li>
 						   <li  class="hh_main_menu" >
