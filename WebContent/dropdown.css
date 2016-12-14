@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+.hh_main_menu {
+	background-color: blue;
+	z-index: 2;
+	list-style-type: none;
+}
+.hh_sf {
+	text-decoration: none;
+	color: white;
+	font-size: 24px;
+}
+.hh_main_menu a:visited, a:link {
+	color: white;
+}
+.hh_main_menu a:hover {
+	color: white;
+	text-decoration: none;
+}
+.hh_inner {
+	z-index: 0;
+	background-color: green;
+	list-style-type: none;
+}
+.hh_inner a {
+	color: black;
+	z-index: 1;
+}
