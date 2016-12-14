@@ -263,6 +263,49 @@
 					    </script>
 					</div>
 				    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
+
+				    <script>
+				 // Dropdown Menu
+				    var dropdown = document.querySelectorAll('.dropdown');
+				    var dropdownArray = Array.prototype.slice.call(dropdown,0);
+				    dropdownArray.forEach(function(el){
+				    	var button = el.querySelector('a[data-toggle="dropdown"]'),
+				    			menu = el.querySelector('.dropdown-menu'),
+				    			arrow = button.querySelector('i.icon-arrow');
+
+				    	button.onclick = function(event) {
+				    		if(!menu.hasClass('show')) {
+				    			menu.classList.add('show');
+				    			menu.classList.remove('hide');
+				    			arrow.classList.add('open');
+				    			arrow.classList.remove('close');
+				    			event.preventDefault();
+				    		}
+				    		else {
+				    			menu.classList.remove('show');
+				    			menu.classList.add('hide');
+				    			arrow.classList.remove('open');
+				    			arrow.classList.add('close');
+				    			event.preventDefault();
+				    		}
+				    	};
+				    })
+
+				    Element.prototype.hasClass = function(className) {
+				        return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
+				    };</script>
+				    <div class="container">
+						  <h1 class="title">Dropdown Menu</h1>
+						  <ul>
+						    <li class="dropdown">
+						      <a href="#" data-toggle="dropdown">First Menu <i class="icon-arrow"></i></a>
+						      <ul class="dropdown-menu">
+						        <li><a href="#">Home</a></li>
+						        <li><a href="#">About Us</a></li>
+						        <li><a href="#">Services</a></li>
+						        <li><a href="#">Contact</a></li>
+								</ul>
+							</ul>
 				    <div class="hh_drop_down">
 						<ul class="hh_main">
 						
