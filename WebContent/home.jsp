@@ -163,16 +163,18 @@
 					  		if(iconMarkers["restaurants"]==null){
 					  			iconMarkers["restaurants"]=[];
 					  		}
+					  		var size = iconMarkers["restaurants"].length;
 						  	for(var i=0;i<size;i++)
 						  	{
-							  	iconMarkers["restaurants"][i].setMap(null);
+						  		iconMarkers["restaurants"][i].setMap(null);
 						  	}
 						  	iconMarkers["restaurants"]=[];
 						  	if(eventdata["restaurants"]==null)
 						  	{
 						  		eventdata["restaurants"]=[];
 					  		}
-						  	var size = eventdata["restaurants"].length;
+						   	size = eventdata["restaurants"].length;
+						   	clearRestaurants();
 						  	for(var i=0;i<size;i++)
 						  	{
 						  		newRestaurant(eventdata["restaurants"][i].name);
@@ -315,6 +317,7 @@
 					    	console.log(type);
 					    	console.log(results);
 					    	if (status == google.maps.places.PlacesServiceStatus.OK) {
+					    		eventdata[type]=[];
 				    			eventdata[type]=results;
 				    			displayRestaurants();
 					    	}
@@ -421,12 +424,23 @@
 			        });
 			</script>
 			<script type="text/javascript">
+				function destroyAllChildren(anchor)
+				{
+					while (anchor.firstChild) {
+						anchor.removeChild(anchor.firstChild);
+					}
+				}
+				function clearRestaurants(){destroyAllChildren(document.getElementById("restaurants_anchor"));}
+				function clearAnchors(text){destroyAllChildren(document.getElementById("flights_anchor"));}
+				function clearEntertainments(){destroyAllChildren(document.getElementById("entertainment_anchor"));}
+				function clearCars(text){destroyAllChildren(document.getElementById("cars_anchor"));}
+				function clearHotels(text){destroyAllChildren(document.getElementById("hotels_anchor"));}
+				
 				function newRestaurant(text){ newElement(document.getElementById("restaurants_anchor"),text); }
 				function newAnchor(text){ newElement(document.getElementById("flights_anchor"),text); }
 				function newEntertainment(){ newElement(document.getElementById("entertainment_anchor"),text); }
 				function newCar(text){ newElement(document.getElementById("cars_anchor"),text); }
 				function newHotel(text){ newElement(document.getElementById("hotels_anchor"),text); }
-				function newFlight(text){ newElement(document.getElementById("flights_anchor"),text); }
 				
 				function newElement(anchor,text)
 				{
