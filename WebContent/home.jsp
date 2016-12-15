@@ -83,6 +83,9 @@
                 <div class="col-1" style="width: 70%; margin-left: 35px; float: left;">
                 	<div id="map"></div>
 					<script type="text/javascript">
+					
+						var flightList = "";
+						
 						var city="";
 						var pic_default = 'pics/default.png';
 						var pic_hotel = 'pics/lodging_0star.png';
@@ -119,6 +122,25 @@
 								  	console.log("CITY: "+city);
 								  	document.getElementById("city_id").innerHTML="";
 								  	document.getElementById("city_id").innerHTML+="City: "+city+"<br>";
+								  	
+								  	
+							  	}
+						  	}
+					  	}
+					  	function setFlight(string){
+					  		console.log(string);
+						  	locationdata=(JSON.parse(string)).results;
+				    	  	console.log(locationdata);
+				    	  	var size = locationdata.length;
+						  	for(var i=0;i<size;i++)
+						  	{
+								  
+							  	if(locationdata[i].types[0]==="locality")
+							  	{
+								  	flight=locationdata[i].formatted_address;
+								  	console.log("Flight: "+city);
+								  	document.getElementById("flight_id").innerHTML="";
+								  	document.getElementById("flight_id").innerHTML+="Flight: "+flight+"<br>";
 								  	
 								  	
 							  	}
@@ -268,16 +290,20 @@
 				            		marker = new google.maps.Marker({position: event.latLng, map: map, icon: pic_default});
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
+				            		
 				            		makeRequest("Getdata?action=city&lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng(),setCity);
-				            		var request = {location: event.latLng,radius: '7500',type: 'restaurant'};
-				            		console.log("Called Restaurants");
-				            		service.nearbySearch(request, callback_restaurants);
-				            		request = {location: event.latLng,radius: '7500',type: 'lodging'};
-				            		console.log("Called Lodging");
-				            		service.nearbySearch(request, callback_hotels);
-				            		request = {location: event.latLng,radius: '7500',type: 'park'};
-				            		console.log("Called Parks");
-				            		service.nearbySearch(request, callback_parks);
+				            		//var request = {location: event.latLng,radius: '7500',type: 'restaurant'};
+				            		//console.log("Called Restaurants");
+				            		//service.nearbySearch(request, callback_restaurants);
+				            		//request = {location: event.latLng,radius: '7500',type: 'lodging'};
+				            		//console.log("Called Lodging");
+				            		//service.nearbySearch(request, callback_hotels);
+				            		//request = {location: event.latLng,radius: '7500',type: 'park'};
+				            		//console.log("Called Parks");
+				            		//service.nearbySearch(request, callback_parks);
+				            		
+				            		makeRequest("Getdata?action=flights", setFlight);
+				            		
 				            		
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				        		}
