@@ -133,7 +133,52 @@
 					      		}
 					    	}
 					  	}
-					  	
+					  	function displayParks()
+					  	{
+					  		
+					  	}
+					  	function displayHotels()
+					  	{
+					  		if(iconMarkers["restaurants"]==null){
+					  			iconMarkers["restaurants"]=[];
+					  		}
+						  	for(var i=0;i<size;i++)
+						  	{
+							  	iconMarkers["restaurants"][i].setMap(null);
+						  	}
+						  	iconMarkers["restaurants"]=[];
+						  	if(eventdata["restaurants"]==null)
+						  	{
+						  		eventdata["restaurants"]=[];
+					  		}
+						  	var size = eventdata["restaurants"].length;
+						  	for(var i=0;i<size;i++)
+						  	{
+						  		newRestaurant(eventdata["restaurants"][i].name);
+								iconMarkers["restaurants"].push(new google.maps.Marker({position: {lat: eventdata["restaurants"][i].geometry.location.lat(), lng: eventdata["restaurants"][i].geometry.location.lng()}, map: map, icon: pic_restaurant}));
+						  	}
+					  	}
+					  	function displayRestaurants()
+					  	{
+					  		if(iconMarkers["restaurants"]==null){
+					  			iconMarkers["restaurants"]=[];
+					  		}
+						  	for(var i=0;i<size;i++)
+						  	{
+							  	iconMarkers["restaurants"][i].setMap(null);
+						  	}
+						  	iconMarkers["restaurants"]=[];
+						  	if(eventdata["restaurants"]==null)
+						  	{
+						  		eventdata["restaurants"]=[];
+					  		}
+						  	var size = eventdata["restaurants"].length;
+						  	for(var i=0;i<size;i++)
+						  	{
+						  		newRestaurant(eventdata["restaurants"][i].name);
+								iconMarkers["restaurants"].push(new google.maps.Marker({position: {lat: eventdata["restaurants"][i].geometry.location.lat(), lng: eventdata["restaurants"][i].geometry.location.lng()}, map: map, icon: pic_restaurant}));
+						  	}
+					  	}
 					  	function displayData(type)
 					  	{
 					  		console.log("displayData("+type+")");
@@ -170,6 +215,9 @@
 						  	size = eventdata[type].length;
 						  	for(var i=0;i<size;i++)
 						  	{
+						  		if(type==="restaurants"){
+						  			newRestaurant();
+						  		}
 						  		console.log("ICON: type="+type);
 								iconMarkers[type].push(new google.maps.Marker({position: {lat: eventdata[type][i].geometry.location.lat(), lng: eventdata[type][i].geometry.location.lng()}, map: map, icon: seticon}));
 						  	}
@@ -219,15 +267,15 @@
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
 				            		makeRequest("Getdata?action=city&lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng(),setCity);
-				            		var request = {location: event.latLng,radius: '1500',type: 'restaurant'};
+				            		var request = {location: event.latLng,radius: '7500',type: 'restaurant'};
 				            		console.log("Called Restaurants");
-				            		service.radarSearch(request, callback_restaurants);
-				            		request = {location: event.latLng,radius: '1500',type: 'lodging'};
+				            		service.nearbySearch(request, callback_restaurants);
+				            		request = {location: event.latLng,radius: '7500',type: 'lodging'};
 				            		console.log("Called Lodging");
-				            		service.radarSearch(request, callback_hotels);
-				            		request = {location: event.latLng,radius: '1500',type: 'park'};
+				            		service.nearbySearch(request, callback_hotels);
+				            		request = {location: event.latLng,radius: '7500',type: 'park'};
 				            		console.log("Called Parks");
-				            		service.radarSearch(request, callback_parks);
+				            		service.nearbySearch(request, callback_parks);
 				            		
 				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
 				        		}
@@ -248,6 +296,14 @@
 					    	console.log("Callback: RESTAURANTS");
 					    	callback(results,status,"restaurants");
 					    }
+					    function callback_restaurant_detail(results,status,text)
+					    {
+					    	console.log("CALLBACK DETAILS: text="+text);
+					    	if (status == google.maps.places.PlacesServiceStatus.OK) {
+				    			console.log(results);
+					    	}
+					    	console.log("STATUS: "+status);
+					    }
 					    function callback_hotels(results,status)
 					    {
 					    	console.log("Callback: HOTELS");
@@ -255,13 +311,20 @@
 					    }
 					    
 						function callback(results, status, type) {
-							console.log("CALLBACK")
+							console.log("CALLBACK");
 					    	console.log(type);
 					    	console.log(results);
 					    	if (status == google.maps.places.PlacesServiceStatus.OK) {
 				    			eventdata[type]=results;
-				    			displayData(type);
+				    			displayRestaurants();
 					    	}
+						}
+						function wait(ms){
+						   	var start = new Date().getTime();
+						   	var end = start;
+						   	while(end < start + ms) {
+						     	end = new Date().getTime();
+						  	}
 						}
 					    </script>
 					</div>
