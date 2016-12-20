@@ -62,6 +62,7 @@
         <div class = "content">
             <div class = "content">
                 <div class ="row">
+<<<<<<< HEAD
                 	<div class="col-1" style="width: 70%; margin-left: 35px; float: left;">
                 		<div id="map"></div>
 							<script type="text/javascript">
@@ -93,6 +94,45 @@
 					    	  	console.log(locationdata);
 					    	  	var size = locationdata.length;
 							  	for(var i=0;i<size;i++)
+=======
+                <div class="col-1" style="width: 70%; margin-left: 35px; float: left;">
+                	<div id="map"></div>
+					<script type="text/javascript">
+					
+						var flightList = "";
+						
+						var city="";
+						var pic_default = 'pics/default.png';
+						var pic_hotel = 'pics/lodging_0star.png';
+						var pic_restaurant = 'pics/restaurant.png';
+						var pic_park = 'pics/forestgump.png'
+					  	var httpRequest;
+						var eventdata=[];
+						var locationdata;
+						var iconMarkers=[];
+					  	function makeRequest(url,function_name) {
+					    	httpRequest = new XMLHttpRequest();
+					    	if (!httpRequest) {
+					      		alert('Giving up :( Cannot create an XMLHTTP instance');
+					      		return false;
+					    	}
+					    	httpRequest.onreadystatechange = function () { alertContents(function_name); };
+					    	httpRequest.open('GET', url);
+					    	httpRequest.send();
+					  	}
+					  	function setHotels(string){
+						  	locationdata=(JSON.parse(string)).results;
+						  	displayData();
+					  	}
+					  	function setCity(string){
+						  	locationdata=(JSON.parse(string)).results;
+				    	  	console.log(locationdata);
+				    	  	var size = locationdata.length;
+						  	for(var i=0;i<size;i++)
+						  	{
+								  
+							  	if(locationdata[i].types[0]==="locality")
+>>>>>>> 3194f224ba6e2f146318eee43001eb624e91b2fc
 							  	{
 									  
 								  	if(locationdata[i].types[0]==="locality")
@@ -106,6 +146,7 @@
 								  	}
 							  	}
 						  	}
+<<<<<<< HEAD
 						  	function alertContents(function_name) {
 						    	if (httpRequest.readyState === XMLHttpRequest.DONE) {
 						      		if (httpRequest.status === 200) {
@@ -114,6 +155,60 @@
 						        		alert('There was a problem with the request.');
 						      		}
 						    	}
+=======
+					  	}
+					  	function setFlight(string){
+					  		console.log(string);
+						  	locationdata=(JSON.parse(string)).results;
+				    	  	console.log(locationdata);
+				    	  	var size = locationdata.length;
+						  	for(var i=0;i<size;i++)
+						  	{
+								  
+							  	if(locationdata[i].types[0]==="locality")
+							  	{
+								  	flight=locationdata[i].formatted_address;
+								  	console.log("Flight: "+city);
+								  	document.getElementById("flight_id").innerHTML="";
+								  	document.getElementById("flight_id").innerHTML+="Flight: "+flight+"<br>";
+								  	
+								  	
+							  	}
+						  	}
+					  	}
+					  	function alertContents(function_name) {
+					    	if (httpRequest.readyState === XMLHttpRequest.DONE) {
+					      		if (httpRequest.status === 200) {
+					    	  		function_name(httpRequest.responseText);
+					      		} else {
+					        		alert('There was a problem with the request.');
+					      		}
+					    	}
+					  	}
+					  	function displayParks()
+					  	{
+					  		
+					  	}
+					  	function displayHotels()
+					  	{
+					  		if(iconMarkers["restaurants"]==null){
+					  			iconMarkers["restaurants"]=[];
+					  		}
+						  	for(var i=0;i<size;i++)
+						  	{
+							  	iconMarkers["restaurants"][i].setMap(null);
+						  	}
+						  	iconMarkers["restaurants"]=[];
+						  	if(eventdata["restaurants"]==null)
+						  	{
+						  		eventdata["restaurants"]=[];
+					  		}
+						  	var size = eventdata["restaurants"].length;
+						  	for(var i=0;i<size;i++)
+						  	{
+						  		newRestaurant(eventdata["restaurants"][i].name);
+								iconMarkers["restaurants"].push(new google.maps.Marker({position: {lat: eventdata["restaurants"][i].geometry.location.lat(), lng: eventdata["restaurants"][i].geometry.location.lng()}, map: map, icon: pic_restaurant}));
+>>>>>>> 3194f224ba6e2f146318eee43001eb624e91b2fc
 						  	}
 						  	function displayParks()
 						  	{
@@ -171,6 +266,7 @@
 						  		{
 						  			seticon=pic_restaurant;
 						  		}
+<<<<<<< HEAD
 						  		else if (type==="hotels")
 						  		{
 						  			seticon=pic_hotel;
@@ -205,6 +301,119 @@
 							  		console.log("ICON: type="+type);
 									iconMarkers[type].push(new google.maps.Marker({position: {lat: eventdata[type][i].geometry.location.lat(), lng: eventdata[type][i].geometry.location.lng()}, map: map, icon: seticon}));
 							  	}
+=======
+						  		console.log("ICON: type="+type);
+								iconMarkers[type].push(new google.maps.Marker({position: {lat: eventdata[type][i].geometry.location.lat(), lng: eventdata[type][i].geometry.location.lng()}, map: map, icon: seticon}));
+						  	}
+					  	}
+					    var marker;
+					    var map;
+					    var service;
+					      function initMap() {
+					        var anoka = {lat: 45.22458150431289, lng: -93.38194370269775};
+					        map = new google.maps.Map(document.getElementById('map'), {
+					          zoom: 4,
+					          center: anoka
+					        });
+					        marker = new google.maps.Marker({
+				            	position: anoka,
+				            	map: map,
+				            	icon: pic_default
+					        });
+					        service = new google.maps.places.PlacesService(map);
+					        
+					        if (navigator.geolocation) {
+					        	navigator.geolocation.getCurrentPosition(function(position) {
+					            	var pos = {
+					              		lat: position.coords.latitude,
+					              		lng: position.coords.longitude
+					            	};
+					                marker.setMap(null);
+				            	    marker = new google.maps.Marker({position: pos, map: map,icon: pic_default});
+					                map.setCenter(pos);
+					            }, function() {
+					            	handleLocationError(true, infoWindow, map.getCenter());
+					            });
+					        } else {
+					            // Browser doesn't support Geolocation
+					        	handleLocationError(false, infoWindow, map.getCenter());
+					        }
+					        google.maps.event.addListener(map, 'click', function(event) {
+					            //marker = new google.maps.Marker({position: event.latLng, map: map});
+					        });
+					        google.maps.event.addListener(
+				        		map,
+				        		'click',
+				        		function(event)
+				        		{
+				        			marker.setMap(null);
+				            		marker = new google.maps.Marker({position: event.latLng, map: map, icon: pic_default});
+				            		anoka=event.latLng;
+				            		map.setCenter(anoka);
+				            		
+				            		makeRequest("Getdata?action=city&lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng(),setCity);
+				            		//var request = {location: event.latLng,radius: '7500',type: 'restaurant'};
+				            		//console.log("Called Restaurants");
+				            		//service.nearbySearch(request, callback_restaurants);
+				            		//request = {location: event.latLng,radius: '7500',type: 'lodging'};
+				            		//console.log("Called Lodging");
+				            		//service.nearbySearch(request, callback_hotels);
+				            		//request = {location: event.latLng,radius: '7500',type: 'park'};
+				            		//console.log("Called Parks");
+				            		//service.nearbySearch(request, callback_parks);
+				            		
+				            		makeRequest("Getdata?action=flights", setFlight);
+				            		
+				            		
+				            		console.log("Lattitude: "+marker.getPosition().lat()+", Longitude: "+marker.getPosition().lng());
+				        		}
+					        );
+					        function handleLocationError(browserHasGeolocation, infoWindow, pos) {}
+					    }
+					      //marker.addListener('click', function() {
+					      //    map.setZoom(8);
+					      //    map.setCenter(marker.getPosition());
+					      //  });
+					    function callback_parks(results,status)
+					    {
+					    	console.log("Callback: PARKS");
+					    	callback(results,status,"parks");
+					    }
+					    function callback_restaurants(results,status)
+					    {
+					    	console.log("Callback: RESTAURANTS");
+					    	callback(results,status,"restaurants");
+					    }
+					    function callback_restaurant_detail(results,status,text)
+					    {
+					    	console.log("CALLBACK DETAILS: text="+text);
+					    	if (status == google.maps.places.PlacesServiceStatus.OK) {
+				    			console.log(results);
+					    	}
+					    	console.log("STATUS: "+status);
+					    }
+					    function callback_hotels(results,status)
+					    {
+					    	console.log("Callback: HOTELS");
+					    	callback(results,status,"hotels");
+					    }
+					    
+						function callback(results, status, type) {
+							console.log("CALLBACK");
+					    	console.log(type);
+					    	console.log(results);
+					    	if (status == google.maps.places.PlacesServiceStatus.OK) {
+					    		eventdata[type]=[];
+				    			eventdata[type]=results;
+				    			displayRestaurants();
+					    	}
+						}
+						function wait(ms){
+						   	var start = new Date().getTime();
+						   	var end = start;
+						   	while(end < start + ms) {
+						     	end = new Date().getTime();
+>>>>>>> 3194f224ba6e2f146318eee43001eb624e91b2fc
 						  	}
 						    var marker;
 						    var map;

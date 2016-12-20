@@ -87,9 +87,9 @@ public class Getdata extends HttpServlet {
         {
         	
         }
-        else if(action.equals("airports"))
+        else if(action.equals("flights"))
         {
-        	
+        	urlstr="https://www.googleapis.com/qpxExpress/v1/trips/search?fields=trips&key="+apiKey;
         }
         else if(action.equals("amusement"))
         {
