@@ -1,13 +1,98 @@
-@CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+* {
+  margin: 0px;
+  padding: 0px;
+  color: #32363F;
+  font: 18px 'Open Sans', sans-serif;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+html {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: table-cell;
+  background: #32363F;
+  vertical-align: middle;
+}
+
+#wrapper {
+  margin: 40px;
+  background: #D6C2A3;
+  width: calc(100% - 80px);
+}
+
+h1 {
+  display: block;
+  padding: 20px 20px 12px;
+  font: 700 36px 'Open Sans', sans-serif;
+  background: #E84949;
+  color: #FAFAFA;
+  text-transform: uppercase;
+}
+
+#prompt {
+  padding: 20px;
+}
+
+#prompt p {
+  padding-bottom: 8px;
+}
+
+#prompt p b {
+  font-weight: 700;
+}
+
+#options {
+  display: flex;
+  padding: 0px 20px 28px;
+  text-align: center;
+}
+
+#options button {
+  margin: 0px 8px;
+  padding: 8px 20px;
+  background: #C2AE8F;
+  width: 100%;
+  cursor: pointer;
+}
+
+#options button:hover,
+#options button:active {
+  background: #E84949;
+  color: #FAFAFA;
+}
+
+//                                DROPDOWN PART
 p{
 	margin:0;
 }
 .hh_main_menu {
 	cursor: pointer;
 	user-select:none;
-	background-color: blue;
+	background-color: #E84949;
 	z-index: 2;
 	list-style-type: none;
+}
+.hh_disabled_menu {
+	cursor: default;
+	user-select: none;
+	background-color: #E84949;
+	z-index: 2;
+	list-style-type: none;
+}
+.hh_nf {
+	cursor: default;
+	user-select:none;
+	text-decoration: none;
+	color: white;
+	font-size: 24px;
 }
 .hh_sf {
 	cursor: pointer;
@@ -25,7 +110,7 @@ p{
 	cursor: pointer;
 	user-select:none;
 	z-index: 0;
-	background-color: green;
+	background-color: grey;
 	list-style-type: none;
 }
 .hh_inner p {
