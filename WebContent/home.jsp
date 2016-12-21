@@ -52,14 +52,24 @@
 	}
 	</style>
     <body>
-    	<div id="dialog" title="Basic dialog">
-  			<p>Hello fellow traveler! My name is Calvin! I am here to assist you on your adventure. To start, select a location on the map. Anywhere you want to go, we can help you. </p>
-		</div>
-       	<div class = "text-center">
-			<h1>Moo-Moo Travel</h1>
+        <div class = "jumbotron">
+            <div class = "text-right">
+                <div class = "col-xs-pull-1">
+                    <div class = "dropdown">
+                        <button class = "btn btn-default dropdown-toggle" type = "button" data-toggle = "dropdown" style = "background-color:#81C6C9; border: 4px solid #489194"><strong>Options</strong>
+                        <img src="pics/gear.png" alt=""/><span class = "caret"></span></button>
+                        <ul class = "dropdown-menu pull-right">
+                            <li><a href = "User?action=logout">Log Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class = "text-center">
+                <h1>Moo-Moo Travel</h1>
+            </div>
         </div>
-        <button id="opener">open the dialog</button>
         <div class = "content">
+<<<<<<< HEAD
            <div class ="row">
                 <div class="col-1" style="width: 70%; margin-left: 35px; float: left;">
              	<div id="map"></div>
@@ -192,12 +202,21 @@
 						  	}
 						  	iconMarkers["restaurants"]=[];
 						  	if(eventdata["restaurants"]==null)
+<<<<<<< HEAD
 						  	{
 						  		eventdata["restaurants"]=[];
 					  		}
 						  	var size = eventdata["restaurants"].length;
 						  	for(var i=0;i<size;i++)
 						  	{
+=======
+						  	{
+						  		eventdata["restaurants"]=[];
+					  		}
+						  	var size = eventdata["restaurants"].length;
+						  	for(var i=0;i<size;i++)
+						  	{
+>>>>>>> parent of 429bec9... COW KEK
 						  		newRestaurant(eventdata["restaurants"][i].name);
 								iconMarkers["restaurants"].push(new google.maps.Marker({position: {lat: eventdata["restaurants"][i].geometry.location.lat(), lng: eventdata["restaurants"][i].geometry.location.lng()}, map: map, icon: pic_restaurant}));
 						  	}
@@ -314,6 +333,7 @@
 				            		marker = new google.maps.Marker({position: event.latLng, map: map, icon: pic_default});
 				            		anoka=event.latLng;
 				            		map.setCenter(anoka);
+<<<<<<< HEAD
 				            		
 				            		makeRequest("Getdata?action=city&lat="+marker.getPosition().lat()+"&lng="+marker.getPosition().lng(),setCity);
 				            		//var request = {location: event.latLng,radius: '7500',type: 'restaurant'};
@@ -634,5 +654,190 @@
 			  					$( "#dialog" ).dialog( "open" )
 			  				});
 					</script>
+=======
+					    function callback_parks(results,status)
+					    {
+					    	console.log("Callback: PARKS");
+					    	callback(results,status,"parks");
+					    }
+					    function callback_restaurants(results,status)
+					    {
+					    	console.log("Callback: RESTAURANTS");
+					    	callback(results,status,"restaurants");
+					    }
+					    function callback_restaurant_detail(results,status,text)
+					    {
+					    	console.log("CALLBACK DETAILS: text="+text);
+					    	if (status == google.maps.places.PlacesServiceStatus.OK) {
+				    			console.log(results);
+					    	}
+					    	console.log("STATUS: "+status);
+					    }
+					    function callback_hotels(results,status)
+					    {
+					    	console.log("Callback: HOTELS");
+					    	callback(results,status,"hotels");
+					    }
+					    
+						function callback(results, status, type) {
+							console.log("CALLBACK");
+					    	console.log(type);
+					    	console.log(results);
+					    	if (status == google.maps.places.PlacesServiceStatus.OK) {
+					    		eventdata[type]=[];
+				    			eventdata[type]=results;
+				    			displayRestaurants();
+					    	}
+						}
+						function wait(ms){
+						   	var start = new Date().getTime();
+						   	var end = start;
+						   	while(end < start + ms) {
+						     	end = new Date().getTime();
+						  	}
+						}
+					    </script>
+					</div>
+				    <div class="col-1" style="width: 20%; margin-left: 35px; float: left;">
+
+				    <script>
+				 // Dropdown Menu
+				    var dropdown = document.querySelectorAll('.dropdown');
+				    var dropdownArray = Array.prototype.slice.call(dropdown,0);
+				    dropdownArray.forEach(function(el){
+				    	var button = el.querySelector('a[data-toggle="dropdown"]'),
+				    			menu = el.querySelector('.dropdown-menu'),
+				    			arrow = button.querySelector('i.icon-arrow');
+
+				    	button.onclick = function(event) {
+				    		if(!menu.hasClass('show')) {
+				    			menu.classList.add('show');
+				    			menu.classList.remove('hide');
+				    			arrow.classList.add('open');
+				    			arrow.classList.remove('close');
+				    			event.preventDefault();
+				    		}
+				    		else {
+				    			menu.classList.remove('show');
+				    			menu.classList.add('hide');
+				    			arrow.classList.remove('open');
+				    			arrow.classList.add('close');
+				    			event.preventDefault();
+				    		}
+				    	};
+				    })
+
+				    Element.prototype.hasClass = function(className) {
+				        return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
+				    };</script>
+				    
+				    <div class="hh_drop_down">
+						<ul class="hh_main">
+						
+						   <li id="flights_menu" class="hh_main_menu">
+						    <p class="hh_sf">Flights</p>
+						     <ul id="flights_anchor" class="hh_inner">
+						        <li><p>MSP -> CHG</p></li>
+						    </ul>
+						  </li>
+						
+						  <li id="hotels_menu" class="hh_main_menu" >
+						    <p class="hh_sf" >Hotels</p>
+						      <ul id="hotels_anchor" class="hh_inner">
+						        <li><p>Sheraton Hotel</p></li>
+						     </ul>
+						
+						  </li>
+						
+						   <li id="cars_menu" class="hh_main_menu" >
+						     <p class="hh_sf" >Rental Cars</p>
+						      <ul id="cars_anchor" class="hh_inner">
+						          <li><p>Enterprise</p></li>
+							</ul>
+						   </li>
+						   <li id="restaurants_menu" class="hh_main_menu" >
+						     <p class="hh_sf">Restaurants</p>
+						      <ul id="restaurants_anchor" class="hh_inner">
+						          <li><p>Trump Steaks</p></li>
+						      </ul>
+						   </li>
+						   <li id="entertainment_menu" class="hh_main_menu" >
+						     <p class="hh_sf">Entertainment</p>
+						      <ul id="entertainment_anchor" class="hh_inner">
+						          <li><p>Parks</p></li>
+						      </ul>
+						   </li>
+						
+						</ul>
+					</div>
+			<script>
+			$(".hh_sf").next().addClass("collapsed").slideUp();
+			
+			$(".hh_main").on('click', '.hh_sf', function (event) {
+			            event.preventDefault();
+			            var currentClass = $(this).next().prop('class');
+			            if (currentClass == "hh_inner expanded") {
+			                $(this).next().removeClass("expanded");
+			                $(this).next().addClass("collapsed");
+			                $(this).next().slideUp();
+			            } else {
+			                $(".expanded").slideUp().addClass("collapsed").removeClass("expanded");
+			
+			                $(this).next().removeClass("collapsed");
+			                $(this).next().addClass("expanded");
+			                $(this).next().slideDown();
+			            }
+			
+			        });
+			</script>
+			<script type="text/javascript">
+				function destroyAllChildren(anchor)
+				{
+					while (anchor.firstChild) {
+						anchor.removeChild(anchor.firstChild);
+					}
+				}
+				function clearRestaurants(){destroyAllChildren(document.getElementById("restaurants_anchor"));}
+				function clearAnchors(text){destroyAllChildren(document.getElementById("flights_anchor"));}
+				function clearEntertainments(){destroyAllChildren(document.getElementById("entertainment_anchor"));}
+				function clearCars(text){destroyAllChildren(document.getElementById("cars_anchor"));}
+				function clearHotels(text){destroyAllChildren(document.getElementById("hotels_anchor"));}
+				
+				function newRestaurant(text){ newElement(document.getElementById("restaurants_anchor"),text); }
+				function newAnchor(text){ newElement(document.getElementById("flights_anchor"),text); }
+				function newEntertainment(){ newElement(document.getElementById("entertainment_anchor"),text); }
+				function newCar(text){ newElement(document.getElementById("cars_anchor"),text); }
+				function newHotel(text){ newElement(document.getElementById("hotels_anchor"),text); }
+				
+				function newElement(anchor,text)
+				{
+					var newNumberListItem = document.createElement("li");
+
+                    //create new text node
+		            var numberListValue = document.createTextNode(text);
+		
+		                    //add text node to li element
+		            newNumberListItem.appendChild(numberListValue);
+		
+		                    //add new list element built in previous steps to unordered list
+		                    //called numberList
+		            anchor.appendChild(newNumberListItem);
+				}
+			
+			</script>
+			<p id="city_id"></p>    
+			</div>
+			</div>
+			<div class="row">
+				<div class="col-1" style="width: 90%; margin-left: 35px;">
+                <h2 style="font-size: 210%"></h2>
+                <p style="font-size: 110%">Moo Moo Travel was created by Team A: Sam Scheidecker and Riley Sumner</p>
+                <p style="font-size: 110%">Anoka's BPA Chapter Number 30-0005</p>
+             </div>
+         </div>
+         </div>
+    	</div>
+    	</div>
+>>>>>>> parent of 429bec9... COW KEK
     </body>
 </html>
