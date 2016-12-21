@@ -94,7 +94,6 @@
 					    	  	var size = locationdata.length;
 							  	for(var i=0;i<size;i++)
 							  	{
-									  
 								  	if(locationdata[i].types[0]==="locality")
 								  	{
 									  	city=locationdata[i].formatted_address;
@@ -209,11 +208,11 @@
 						    var marker;
 						    var map;
 						    var service;
-						      function initMap() {
+							function initMap() {
 						        var anoka = {lat: 45.22458150431289, lng: -93.38194370269775};
 						        map = new google.maps.Map(document.getElementById('map'), {
-						          zoom: 4,
-						          center: anoka
+						          	zoom: 4,
+						          	center: anoka
 						        });
 						        marker = new google.maps.Marker({
 					            	position: anoka,
@@ -239,7 +238,7 @@
 						        	handleLocationError(false, infoWindow, map.getCenter());
 						        }
 						        google.maps.event.addListener(map, 'click', function(event) {
-						            //marker = new google.maps.Marker({position: event.latLng, map: map});
+						            marker = new google.maps.Marker({position: event.latLng, map: map});
 						        });
 						        google.maps.event.addListener(
 					        		map,
