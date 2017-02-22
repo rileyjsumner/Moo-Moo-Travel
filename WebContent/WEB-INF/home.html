@@ -1,0 +1,326 @@
+<html>
+	<head>
+		<title>Home</title>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<meta charset="UTF-8">
+		<link rel = "stylesheet" href = "main.css" type="text/css">
+		<link rel = "stylesheet" href = "dropdown.css" type = "text/css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src = "cookies.js"></script>
+		<script src = "login.js"></script>
+		<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+		<script src = 'home.js'></script>
+		<script defer src = "home_init.js"></script>
+		<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFnRgp5wG3WNEKiLZg8Cjk5vjSyvL86_8&libraries=places&callback=initMap"></script>
+	</head>
+	<body>
+	   	<div class = "jumbotron">
+			<h1 class="jumbotron_text">Moo-Moo Travel</h1>
+			<div id = "user_menu">
+				<p id = "user_menu_text">Logged in as</p><p id = "main_user_name"></p>
+				<i id="login_warn_icon" class="fa fa-warning warning_hidden"></i>
+				<p id="login_warn_text">Your vacations will not be saved unless you log in!</p>
+				<div class="user_dropdown_container">
+					<button id="userBtn" class="user_dropbtn">Dropdown</button>
+					<div id="user_dropdown_content">
+						<form action = "Admin" method="POST">
+							<button class="user_dropdown_option" style="display:none;font-weight:bold;" id="user_func_adminpanel">Admin Panel</button>
+							<input type="hidden" id="user_username" name="username" value="">
+							<input type="hidden" id="user_password" name="password" value="">
+						</form>
+						<p class="user_dropdown_option" id="user_func_savevac">Save Vacation</p>
+						<p class="user_dropdown_option" id="user_func_viewvacs">Load Vacations</p>
+						<p class="user_dropdown_option" id="user_func_edit_account">Edit Account</p>
+						<p class="user_dropdown_option" id="user_func_logout">Log out</p>
+					</div>
+				</div>
+			</div>
+			<!-- The Login / Create Account Window -->
+			<div id="login_window_background" class="modal">
+				<!-- Modal content -->
+				<div id="login_window" class="modal-content">
+					<span class="close">&times;</span>
+					<p class="login_maintext">Log in</p>
+					<input id="login_input_username" class="submitsLogin login_input" placeholder="User name" type="text"/>
+					<input id = "login_input_password" class="submitsLogin login_input" placeholder="Password" type="password"/>
+					<input id="login_input_firstname" style="display:none" class="login_input" placeholder="First Name" type="text"/>
+					<input id = "login_input_lastname" style="display:none" class="login_input" placeholder="Last Name" type="text"/>
+					<input id="login_input_email" style="display:none" class="login_input" placeholder="Email" type="text"/>
+					<p id = "login_failed">Login Failed<p>
+					<p class="login_button" id="login_button">Log in</p>
+					<p class="login_button" id="newaccount_button">Create Account</p>
+					<p class="login_forgot">Forgot password?</p>
+				</div>
+			</div>
+			<!-- The Help / Warning Window -->
+			<div id="help_window_background" class="modal">
+				<!-- Modal content -->
+				<div id="help_window" class="modal-content">
+					<span id="closeHelp" class="close">&times;</span>
+					<p class="login_maintext" id="help_window_text"></p>
+					<p class="login_button" id="help_button_1"></p>
+					<p class="login_button" id="help_button_2"></p>
+				</div>
+			</div>
+			<!-- The Save Vacation Window -->
+			<div id="save_window_background" class="modal">
+				<!-- Modal content -->
+				<div id="save_window" class="modal-content">
+					<span id="closeSave" class="close">&times;</span>
+					<p class="login_maintext">Save your vacation</p>
+					<input id="save_input" class="login_input" placeholder="Vacation Name" type="text"/>
+					<p class="login_button" id="save_button">Save vacation</p>
+					<p class="login_maintext" style="margin-bottom: 10;">Saved vacations</p>
+					<table id = "save_past_table" class="save_past_table">
+						<tr class="save_past_row"><td class="save_past_name">vac1sd</td><td class="save_past_place">Duluth to rochester</td><td class="save_past_date">4545/54/43</td></tr>
+						<tr class="save_past_row"><td class="save_past_name">fgjafasjdf</td><td class="save_past_place">The shire to mordor</td><td class="save_past_date">2312/54/54</td></tr>
+						<tr class="save_past_row"><td class="save_past_name">asdasdads</td><td class="save_past_place">Trump towers to the white house</td><td class="save_past_date">2017/02/82</td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class = "content">
+			<table style="width:100%">
+				<tr><td style="width:100%; vertical-align:top">
+			   		<div id="map" style="margin-left:18"></div>
+			   		<div style="width: 90%; margin-left: 35px; color:white">
+			   			<h2 style="font-size: 210%"></h2>
+			   			<p style="color:white;font-size: 110%">Moo Moo Travel was created by Team A: Sam Scheidecker and Riley Sumner</p>
+			   			<p style="color:white;font-size: 110%">Anoka's BPA Chapter Number 30-0005</p>
+					</div>
+				</td><td style="display:inline-block">
+					<div style="width:450">
+						<div class="hh_drop_down">
+							<ul class="hh_main" id="dropdown_main_list">
+							   	<li id="flight_menu" class="hh_main_menu">
+							   		<div class="hh_title" id="flight_title">
+							   			<p id="flight_icon" class ="careticon fa fa-caret-right"></p>
+							   			<p id="flight_click" class="hh_sf">Flight</p>
+							   		</div>
+								 	<ul id="flight_anchor" class="hh_inner collapsed">
+										<li id="flight_line_origin" class="list_line">
+											<p class="list_prop">Origin</p>
+											<div id="button_reject_flight_origin" class="list_button">
+												<p id="button_icon_reject_flight_origin" class="list_button_icon fa fa-refresh fa-spin"></p>
+											</div>
+											<div id="button_confirm_flight_origin" class="list_button">
+												<p id="button_icon_confirm_flight_origin" class="list_button_icon fa fa-refresh fa-spin"></p>
+											</div>
+											<p id="value_flight_origin" class="list_val detail_value"></p>
+										</li>
+										<li id="flight_line_destination" class="list_line">
+											<p class="list_prop">Destination</p>
+											<div id="button_reject_flight_destination" class="list_button">
+												<p id="button_icon_reject_flight_destination" class="list_button_icon fa fa-refresh fa-spin"></p>
+											</div>
+											<div id="button_confirm_flight_destination" class="list_button">
+												<p id="button_icon_confirm_flight_destination" class="list_button_icon fa fa-refresh fa-spin"></p>
+											</div>
+											<p id="value_flight_destination" class="list_val"></p>
+										</li>
+										<li id="flight_line_departure_date" class="list_line">
+											<p class="list_prop">Departure Date</p>
+											<input type="date" id="value_flight_departure_date" class="list_val list_date"/>
+											<select id="value_flight_departure_time" class="list_val list_time">
+												<option class="selector_elem" value="0" selected>All Times</option><option class="selector_elem" value="1">Morning</option>
+												<option class="selector_elem" value="2">Afternoon</option><option class="selector_elem" value="3">Evening</option>
+											</select>
+										</li>
+										<li id="flight_line_return_date" class="list_line">
+											<p class="list_prop">Return Date</p>
+											<input type="date" id="value_flight_return_date" class="list_val list_date"/>
+											<select id="value_flight_return_time" class="list_val list_time">
+												<option class="selector_elem" value="0" selected>All Times</option><option class="selector_elem" value="1">Morning</option>
+												<option class="selector_elem" value="2">Afternoon</option><option class="selector_elem" value="3">Evening</option>
+											</select>
+										</li>
+										
+										<li id="flight_line_passengers" class="list_line">
+											<div id="flight_passengers_title" class="hh_subtitle">
+												<p id="flight_passengers_icon" class ="subcareticon fa fa-caret-right"></p>
+												<p class="list_subtitle">Passengers</p>
+											</div>
+											<ul id="flight_passengers_anchor" class="hh_inner_sub collapsed">
+												<li id="flight_line_adults" class="sub_list_line"><p class="list_prop">Adults</p><select id="value_flight_adults" class="value_flights list_val list_time">
+												<option class="selector_elem" value="1">1</option><option class="selector_elem" value="2">2</option><option class="selector_elem" value="3">3</option><option class="selector_elem" value="4">4</option><option class="selector_elem" value="5">5</option><option class="selector_elem" value="6">6</option></select></li>
+												<li id="flight_line_children" class="sub_list_line"><p class="list_prop">Children</p><select id="value_flight_children" class="value_flights list_val list_time">
+												<option class="selector_elem" value="0">0</option><option class="selector_elem" value="1">1</option><option class="selector_elem" value="2">2</option><option class="selector_elem" value="3">3</option><option class="selector_elem" value="4">4</option><option class="selector_elem" value="5">5</option><option class="selector_elem" value="6">6</option></select></li>
+												<li id="flight_line_seniors" class="sub_list_line"><p class="list_prop">Seniors</p><select id="value_flight_seniors" class="value_flights list_val list_time">
+												<option class="selector_elem" value="0">0</option><option class="selector_elem" value="1">1</option><option class="selector_elem" value="2">2</option><option class="selector_elem" value="3">3</option><option class="selector_elem" value="4">4</option><option class="selector_elem" value="5">5</option><option class="selector_elem" value="6">6</option></select></li>
+												<li id="flight_line_infants_in_lap" class="sub_list_line"><p class="list_prop">Infants in lap</p><select id="value_flight_infants_in_lap" class="value_flights list_val list_time">
+												<option class="selector_elem" value="0">0</option><option class="selector_elem" value="1">1</option><option class="selector_elem" value="2">2</option><option class="selector_elem" value="3">3</option><option class="selector_elem" value="4">4</option><option class="selector_elem" value="5">5</option><option class="selector_elem" value="6">6</option></select></li>
+												<li id="flight_line_infants_in_seat" class="sub_list_line"><p class="list_prop">Infants in seat</p><select id="value_flight_infants_in_seat" class="value_flights list_val list_time">
+												<option class="selector_elem" value="0">0</option><option class="selector_elem" value="1">1</option><option class="selector_elem" value="2">2</option><option class="selector_elem" value="3">3</option><option class="selector_elem" value="4">4</option><option class="selector_elem" value="5">5</option><option class="selector_elem" value="6">6</option></select></li>
+											</ul>
+										</li>
+										<li id="flight_line_flights" class="list_line">
+											<div class="search_container">
+												<p class="list_prop">Flights</p>
+												<div id="button_search_flights" class="list_button button_search">
+													<p id = "button_text_search_flights" class="list_search">Search</p>
+													<p id = "button_icon_search_flights" class="list_button_icon icon_search fa fa-search"></p>
+												</div>
+												<p id="flights_search_waiting" class="search_refresh fa fa-spin"></p>
+												<p id="flights_search_notfound" class="searching_found">No flights found</p>
+											</div>
+											<div id="flights_anchor_outer">
+												<div id="flights_anchor_inner">
+													<div id="flights_anchor"></div>
+												</div>
+											</div>
+										</li>
+									</ul>
+							  	</li>
+								<li id="vacation_menu" class="hh_main_menu" >
+							  		<div class="hh_title" id="vacation_title">
+							  			<p id="vacation_icon" class ="careticon fa fa-caret-right"></p>
+							  			<p id="vacation_click" class="hh_sf">Vacation</p>
+							  		</div>
+							  		<ul id="vacation_anchor" class="hh_inner collapsed" style="display:block;">
+							  			<li id="vacation_line_header" class="list_line">
+											<p class="list_header">This is the spot that all the things (hotels, cars, entertainment) you plan on your vacation will be centered around.</p>
+										</li>
+										<li id="vacation_line_custom" class="list_line">
+											<p class="list_prop">Would you like to center your vacation around something other than the airport you will arrive at?</p>
+											<select id="value_vacation_custom" class="list_val list_time">
+												<option class="selector_elem" value="0" selected>Just use the Airport</option><option class="selector_elem" value="1">Use your own location</option></select>
+										</li>
+							  			<li id="vacation_line_location" style="display:none" class="list_line">
+											<p class="list_prop">Vacation Location</p>
+											<div id="button_reject_vac_location" class="list_button">
+												<p id="button_icon_reject_vac_location" class="list_button_icon fa fa-refresh fa-spin"></p>
+											</div>
+											<div id="button_confirm_vac_location" class="list_button">
+												<p id="button_icon_confirm_vac_location" class="list_button_icon fa fa-refresh fa-spin"></p>
+											</div>
+											<p id="value_vac_location" class="list_val detail_value"></p>
+										</li>
+									</ul>
+							  	</li>
+							  	<li id="hotel_menu" class="hh_main_menu" >
+							  		<div class="hh_title" id="hotel_title">
+							  			<p id="hotel_icon" class ="careticon fa fa-caret-right"></p>
+							  			<p id="hotel_click" class="hh_sf">Accommodations</p>
+							  		</div>
+							  		<ul id="hotel_anchor" class="hh_inner collapsed" style="display:block;">
+							  			<li class="list_line">
+									  		<div id="hotel_filters_title" class="hh_subtitle">
+												<p id="hotel_info_icon" class ="subcareticon fa fa-caret-right"></p>
+												<p class="list_subtitle">Search Filters</p>
+											</div>
+										  	<ul id="hotel_passengers_anchor" class="hh_inner_sub collapsed">
+												<li id="hotel_line_max_price" class="sub_list_line"><p class="list_prop">Max Price</p><input type="number" id="value_hotel_max_price" class="list_val list_number" value="0"/></li>
+												<li id="hotel_line_min_price" class="sub_list_line"><p class="list_prop">Min Price</p><input type="number" id="value_hotel_min_price" class="list_val list_number" value="0"/></li>
+												<li id="hotel_line_size" class="sub_list_line"><p class="list_prop">Party Size</p><input type="number" id="value_hotel_party_size" class="list_val list_number" value="0"/></li>
+												<li id="hotel_line_max_rating" class="sub_list_line"><p class="list_prop">Max Rating</p><input type="number" id="value_hotel_max_rating" class="list_val list_number" value="0"/></li>
+												<li id="hotel_line_min_rating" class="sub_list_line"><p class="list_prop">Min Rating</p><input type="number" id="value_hotel_min_rating" class="list_val list_number" value="0"/></li>
+											</ul>
+										</li>
+										<li id="hotel_line_hotels" class="list_line">
+											<p class="list_prop">Filters</p>
+											<div id="button_search_hotels" class="list_button button_search">
+												<p id = "button_text_search_hotels" class="list_search">Search</p>
+												<p id = "button_icon_search_hotels" class="list_button_icon icon_search fa fa-search"></p>
+											</div>
+											<p id="hotels_search_waiting" class="search_refresh fa fa-spin"></p>
+											<p id="hotels_search_notfound" class="searching_found">No Hotels found</p>
+											<ul id="hotels_anchor" style="display:block;"></ul>
+										</li>
+									</ul>
+							  	</li>
+							   	<li id="car_menu" class="hh_main_menu" >
+							  		<div class="hh_title" id="car_title">
+							  			<p id="car_icon" class ="careticon fa fa-caret-right"></p>
+							  			<p id="car_click" class="hh_sf">Cars</p>
+							  		</div>
+							  		<ul id="car_anchor" class="hh_inner collapsed" style="display:block;">
+							  			<li class="list_line">
+									  		<div id="car_filters_title" class="hh_subtitle">
+												<p id="car_info_icon" class ="subcareticon fa fa-caret-right"></p>
+												<p class="list_subtitle">Search Filters</p>
+											</div>
+										  	<ul id="cars_passengers_anchor" class="hh_inner_sub collapsed">
+												<li id="car_line_max_price" class="sub_list_line"><p class="list_prop">Max Price</p><input type="number" id="value_car_max_price" class="list_val list_number" value="0"/></li>
+												<li id="car_line_min_price" class="sub_list_line"><p class="list_prop">Min Price</p><input type="number" id="value_car_min_price" class="list_val list_number" value="0"/></li>
+												<li id="car_line_size" class="sub_list_line"><p class="list_prop">Party Size</p><input type="number" id="value_car_party_size" class="list_val list_number" value="0"/></li>
+												<li id="car_line_max_rating" class="sub_list_line"><p class="list_prop">Max Rating</p><input type="number" id="value_car_max_rating" class="list_val list_number" value="0"/></li>
+												<li id="car_line_min_rating" class="sub_list_line"><p class="list_prop">Min Rating</p><input type="number" id="value_car_min_rating" class="list_val list_number" value="0"/></li>
+											</ul>
+										</li>
+										<li id="car_line_cars" class="list_line">
+											<p class="list_prop">Filters</p>
+											<div id="button_search_cars" class="list_button button_search">
+												<p id = "button_text_search_cars" class="list_search">Search</p>
+												<p id = "button_icon_search_cars" class="list_button_icon icon_search fa fa-search"></p>
+											</div>
+											<ul id="cars_anchor" style="display:block;"></ul>
+										</li>
+									</ul>
+							  	</li>
+							   	<li id="restaurant_menu" class="hh_main_menu" >
+							  		<div class="hh_title" id="restaurant_title">
+							  			<p id="restaurant_icon" class ="careticon fa fa-caret-right"></p>
+							  			<p id="restaurant_click" class="hh_sf">Restaurants</p>
+							  		</div>
+							  		<ul id="restaurant_anchor" class="hh_inner collapsed" style="display:block;">
+							  			<li class="list_line">
+									  		<div id="restaurant_filters_title" class="hh_subtitle">
+												<p id="restaurant_info_icon" class ="subcareticon fa fa-caret-right"></p>
+												<p class="list_subtitle">Search Filters</p>
+											</div>
+										  	<ul id="restaurants_passengers_anchor" class="hh_inner_sub collapsed">
+												<li id="restaurant_line_max_price" class="sub_list_line"><p class="list_prop">Max Price</p><input type="number" id="value_restaurant_max_price" class="list_val list_number" value="0"/></li>
+												<li id="restaurant_line_min_price" class="sub_list_line"><p class="list_prop">Min Price</p><input type="number" id="value_restaurant_min_price" class="list_val list_number" value="0"/></li>
+												<li id="restaurant_line_size" class="sub_list_line"><p class="list_prop">Party Size</p><input type="number" id="value_restaurant_party_size" class="list_val list_number" value="0"/></li>
+												<li id="restaurant_line_max_rating" class="sub_list_line"><p class="list_prop">Max Rating</p><input type="number" id="value_restaurant_max_rating" class="list_val list_number" value="0"/></li>
+												<li id="restaurant_line_min_rating" class="sub_list_line"><p class="list_prop">Min Rating</p><input type="number" id="value_restaurant_min_rating" class="list_val list_number" value="0"/></li>
+											</ul>
+										</li>
+										<li id="restaurant_line_restaurants" class="list_line">
+											<p class="list_prop">Filters</p>
+											<div id="button_search_restaurants" class="list_button button_search">
+												<p id = "button_text_search_restaurants" class="list_search">Search</p>
+												<p id = "button_icon_search_restaurants" class="list_button_icon icon_search fa fa-search"></p>
+											</div>
+											<ul id="restaurants_anchor" style="display:block;"></ul>
+										</li>
+									</ul>
+							  	</li>
+							   	<li id="entertainment_menu" class="hh_main_menu" >
+								  		<div class="hh_title" id="entertainment_title">
+								  			<p id="entertainment_icon" class ="careticon fa fa-caret-right"></p>
+								  			<p id="entertainment_click" class="hh_sf">Entertainment</p>
+								  		</div>
+								  		<ul id="entertainment_anchor" class="hh_inner collapsed" style="display:block;">
+								  			<li class="list_line">
+										  		<div id="entertainment_filters_title" class="hh_subtitle">
+								        			<p id="entertainment_info_icon" class ="subcareticon fa fa-caret-right"></p>
+								        			<p class="list_subtitle">Search Filters</p>
+								        		</div>
+										      	<ul id="entertainment_passengers_anchor" class="hh_inner_sub collapsed">
+								        			<li id="entertainment_line_max_price" class="sub_list_line"><p class="list_prop">Max Price</p><input type="number" id="value_entertainment_max_price" class="list_val list_number" value="0"/></li>
+								        			<li id="entertainment_line_min_price" class="sub_list_line"><p class="list_prop">Min Price</p><input type="number" id="value_entertainment_min_price" class="list_val list_number" value="0"/></li>
+								        			<li id="entertainment_line_size" class="sub_list_line"><p class="list_prop">Party Size</p><input type="number" id="value_entertainment_party_size" class="list_val list_number" value="0"/></li>
+								        			<li id="entertainment_line_max_rating" class="sub_list_line"><p class="list_prop">Max Rating</p><input type="number" id="value_entertainment_max_rating" class="list_val list_number" value="0"/></li>
+								        			<li id="entertainment_line_min_rating" class="sub_list_line"><p class="list_prop">Min Rating</p><input type="number" id="value_entertainment_min_rating" class="list_val list_number" value="0"/></li>
+								        		</ul>
+							        		</li>
+							        		<li id="entertainment_line_entertainments" class="list_line">
+								        		<p class="list_prop">Filters</p>
+								        		<div id="button_search_entertainment" class="list_button button_search">
+								        			<p id = "button_text_search_entertainment" class="list_search">Search</p>
+								        			<p id = "button_icon_search_entertainment" class="list_button_icon icon_search fa fa-search"></p>
+								        		</div>
+							        			<ul id="entertainments_anchor"></ul>
+								        	</li>
+						        		</ul>
+								  	</li>
+							
+							</ul>
+						</div>
+					</div>
+				</td></tr>
+			</table>
+		</div>
+	</body>
+</html>

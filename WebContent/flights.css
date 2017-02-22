@@ -1,0 +1,44 @@
+.flight_airline
+{
+	color: #E84949;
+    font-size: 15;
+    margin-bottom: 0;
+    display: inline-block;
+    font-weight:bold;
+}
+.flight_airplane
+{
+	color: white;
+    font-size: 12;
+    position: relative;
+    bottom: 6px;
+}
+.flight_cost{
+	color: white;
+    font-size: 18;
+    margin-bottom: 0;
+    display: block;
+    float: right;
+    position: relative;
+    bottom: 33;
+}
+.flight_container{
+	padding-left:10px;
+	padding-right:10px;
+	transition: background-color 0.10s ease-in-out;
+}
+.flight_container:hover{
+	background-color:#853F44;
+}
+.flight_legs
+{
+	color: white;
+    font-size: 15;
+    margin-bottom: 0;
+    display: block;
+    float: right;
+    position: relative;
+    bottom: 32;
+    margin-right:10;
+    
+}

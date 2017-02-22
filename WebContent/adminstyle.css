@@ -1,0 +1,61 @@
+#admin_user_table{
+	width:100%;
+	padding-left:5%;
+	padding-right:5%;
+	padding-top:20px;
+	border-collapse:collapse;
+}
+.admin_header{
+	text-align:left;
+	color: #e84949;
+}
+.admin_id{
+	transition: background-color 0.05s ease-in-out;
+	cursor:pointer;
+}
+.admin_id:hover{
+	background-color:#e84949;
+}
+.admin_id_remove{
+	transition: background-color 0.05s ease-in-out;
+	cursor:pointer;
+}
+.admin_id_remove:hover{
+	background-color:#e84949;
+}
+.admin_user_row:nth-child(even){
+	background-color:#434956;
+}
+.admin_user_row{
+	
+}
+#new_user_btn{
+	width: 200;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: e84949;
+    border-style: solid;
+    border-color: e84949;
+    border-radius: 10px;
+}
+.admin_val{
+	color: white;
+	padding-left:15;
+	padding-right:15;
+	padding-top:2;
+	padding-bottom:2;
+}
+.login_desctext{
+	margin-bottom: -15px;
+    font-size: 13;
+}
+.login_input{
+	width:300!important;
+}
+#user_window{
+	margin:5% auto;
+}
