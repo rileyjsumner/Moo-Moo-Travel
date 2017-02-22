@@ -1504,3 +1504,4 @@ function displayEnt(type) {
 			entertainment_anchor.appendChild(handle_main);
 		}
 }
+//End File

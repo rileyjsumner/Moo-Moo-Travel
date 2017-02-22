@@ -65,7 +65,7 @@ var pic_entertainment_selected = 'pics/smiley_happy.png'
 var pic_ent=['pics/themepark.png','pics/restaurant_fish.png','pics/artgallery.png','pics/bar_cocktail.png','pics/bowling.png',
 	'pics/campfire-2.png','pics/casino-2.png','pics/library.png','pics/movierental.png','pics/congress.png','pics/party-2.png',
 	'pics/riparianhabitat.png','pics/stadium.png','pics/zoo.png'];
-var pic_park='pics/riparianhabitat.png';
+var pic_park='pics/riparianhabitat.png';//park img
 var httpRequest;
 var eventdata=[];
 var locationdata;
