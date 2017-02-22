@@ -82,6 +82,9 @@ setButtonStateWaiting("vac_location");
 $(".hh_inner").slideUp(0);
 $(".hh_inner_sub").slideUp(0);
 
+$(document).ready(function() {
+	openHelpWindow();
+});
 //Handle clicking collapsing sidebars
 $("#dropdown_main_list").on("click",".hh_title",function ()
 {
@@ -372,6 +375,33 @@ function closeLoginWindow(){
 		$("#login_input_email").val("");
 		$("#login_input_lastname").val("");
 		$("#login_input_firstname").val("");
+	});
+}
+function openHelpWindow()
+{
+	$("#help_window_background").fadeIn(400,function(){
+		$("#help").val("Start by confirming the airport you would like to leave from. Then identify where you would like to go.");
+		$("#more_help").val("Then choose your vacation dates and utilize the search features to select other elements of your vacation! Happy Travels!");
+		//$("#login_failed").slideUp();
+	});
+}
+function closeHelpWindow(){
+	$("#help_window_background").fadeOut(400,function(){
+		modal.style.display="none";
+		$("#help").val("");
+		$("#help").val("");
+		//$("#login_failed").slideUp();
+		
+		/* Go back to log in
+		isCreate=false;
+		$("#login_maintext").text("Log in")
+		$("#login_button").slideDown();
+		$("#login_input_email").slideUp();
+		$("#login_input_lastname").slideUp();
+		$("#login_input_firstname").slideUp();
+		$("#login_input_email").val("");
+		$("#login_input_lastname").val("");
+		$("#login_input_firstname").val("");*/
 	});
 }
 //log in function

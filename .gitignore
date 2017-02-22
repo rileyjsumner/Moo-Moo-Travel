@@ -1,3 +1,4 @@
 /build/
 .metadata/
 WebContent/pics/
+.settings/org.eclipse.wst.ws.service.policy.prefs
